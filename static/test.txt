@@ -1,0 +1,281 @@
+<br>onda-ks.cfg  Documents           login.dmp  password.txt          Templates
+<br>             Downloads           mama100    Pictures              test
+<br>             install.log         method.py  Public                test.sh
+<br>top          install.log.syslog  Music      run_sql_20150825.sql  Videos
+<br>t@localhost ~]# df -h
+<br>system            Size  Used Avail Use% Mounted on
+<br>/vda3              57G  7.0G   48G  13% /
+<br>s                 7.8G  272K  7.8G   1% /dev/shm
+<br>/vda1             194M   32M  153M  17% /boot
+[root@localhost<br>~]#<br>
+Last login: Tue Dec  8 12:41:22 2015 from 192.168.234.139
+[root@localhost ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/vda3              57G  7.0G   48G  13% /
+tmpfs                 7.8G  272K  7.8G   1% /dev/shm
+/dev/vda1             194M   32M  153M  17% /boot
+[root@localhost ~]# top
+[H[J[mtop - 12:42:40 up 113 days,  2:22, 13 users,  load average: 0.01, 0.03, 0.02[m[K
+Tasks:[m[m 236 [mtotal,[m[m   1 [mrunning,[m[m 226 [msleeping,[m[m   9 [mstopped,[m[m   0 [mzombie[m[K
+Cpu(s):[m[m  1.0%[mus,[m[m  0.5%[msy,[m[m  0.0%[mni,[m[m 98.4%[mid,[m[m  0.0%[mwa,[m[m  0.0%[mhi,[m[m  0.0%[msi,[m[m  0.0%[mst[m[K
+Mem: [m[m  3753828k [mtotal,[m[m  2911112k [mused,[m[m   842716k [mfree,[m[m   295616k [mbuffers[m[K
+Swap:[m[m  2097144k [mtotal,[m[m    56204k [mused,[m[m  2040940k [mfree,[m[m  1605876k [mcached[m[K
+[6;1H
+[7m  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND            [m[K
+[m32226 root      20   0  367m  31m 4460 S  3.9  0.9   0:37.61 python             [m
+[m[m 2366 root      20   0 15172 1180  800 R  2.0  0.0   0:00.01 top                [m
+[m32227 root      20   0  434m  31m 4468 S  2.0  0.9   0:45.05 python             [m
+[m    1 root      20   0 19348  564  348 S  0.0  0.0   0:01.84 init               [m
+[m    2 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kthreadd           [m
+[m    3 root      RT   0     0    0    0 S  0.0  0.0   0:05.49 migration/0        [m
+[m    4 root      20   0     0    0    0 S  0.0  0.0   1135:15 ksoftirqd/0        [m
+[m    5 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0        [m
+[m    6 root      RT   0     0    0    0 S  0.0  0.0   0:22.10 watchdog/0         [m
+[m    7 root      RT   0     0    0    0 S  0.0  0.0   0:09.76 migration/1        [m
+[m    8 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/1        [m
+[m    9 root      20   0     0    0    0 S  0.0  0.0   5298:19 ksoftirqd/1        [m
+[m   10 root      RT   0     0    0    0 S  0.0  0.0   0:19.50 watchdog/1         [m
+[m   11 root      RT   0     0    0    0 S  0.0  0.0   0:06.81 migration/2        [m
+[m   12 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/2        [m
+[m   13 root      20   0     0    0    0 S  0.0  0.0   2155:35 ksoftirqd/2        [m
+[m   14 root      RT   0     0    0    0 S  0.0  0.0   0:18.10 watchdog/2         [m[6;1H[K[H[mtop - 12:42:43 up 113 days,  2:22, 13 users,  load average: 0.01, 0.03, 0.02[m[K
+Tasks:[m[m 236 [mtotal,[m[m   1 [mrunning,[m[m 226 [msleeping,[m[m   9 [mstopped,[m[m   0 [mzombie[m[K
+Cpu(s):[m[m  0.8%[mus,[m[m  0.7%[msy,[m[m  0.0%[mni,[m[m 98.4%[mid,[m[m  0.0%[mwa,[m[m  0.0%[mhi,[m[m  0.0%[msi,[m[m  0.0%[mst[m[K
+Mem: [m[m  3753828k [mtotal,[m[m  2911128k [mused,[m[m   842700k [mfree,[m[m   295616k [mbuffers[m[K
+Swap:[m[m  2097144k [mtotal,[m[m    56204k [mused,[m[m  2040940k [mfree,[m[m  1605876k [mcached[m[K
+[6;1H
+[7m  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND            [m[K
+[m32227 root      20   0  434m  31m 4468 S  3.0  0.9   0:45.14 python             [m
+[m   17 root      20   0     0    0    0 S  2.3  0.0   1172:07 ksoftirqd/3        [m
+[m32228 root      20   0  367m  30m 4452 S  2.3  0.8   0:37.96 python             [m
+[m32226 root      20   0  367m  31m 4460 S  1.7  0.9   0:37.66 python             [m
+[m 2176 root      20   0 40324  184  128 S  0.3  0.0  53:32.52 udisks-daemon      [m
+[m 2335 root      20   0  263m  12m 3580 S  0.3  0.3   0:00.24 python             [m
+[m[m 2366 root      20   0 15144 1276  892 R  0.3  0.0   0:00.02 top                [m
+[m    1 root      20   0 19348  564  348 S  0.0  0.0   0:01.84 init               [m
+[m    2 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kthreadd           [m
+[m    3 root      RT   0     0    0    0 S  0.0  0.0   0:05.49 migration/0        [m
+[m    4 root      20   0     0    0    0 S  0.0  0.0   1135:15 ksoftirqd/0        [m
+[m    5 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0        [m
+[m    6 root      RT   0     0    0    0 S  0.0  0.0   0:22.10 watchdog/0         [m
+[m    7 root      RT   0     0    0    0 S  0.0  0.0   0:09.76 migration/1        [m
+[m    8 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/1        [m
+[m    9 root      20   0     0    0    0 S  0.0  0.0   5298:19 ksoftirqd/1        [m
+[m   10 root      RT   0     0    0    0 S  0.0  0.0   0:19.50 watchdog/1         [m[6;1H[K[H[mtop - 12:42:46 up 113 days,  2:22, 13 users,  load average: 0.01, 0.03, 0.02[m[K
+Tasks:[m[m 236 [mtotal,[m[m   2 [mrunning,[m[m 225 [msleeping,[m[m   9 [mstopped,[m[m   0 [mzombie[m[K
+Cpu(s):[m[m  0.9%[mus,[m[m  0.7%[msy,[m[m  0.0%[mni,[m[m 98.3%[mid,[m[m  0.0%[mwa,[m[m  0.0%[mhi,[m[m  0.0%[msi,[m[m  0.0%[mst[m[K
+Mem: [m[m  3753828k [mtotal,[m[m  2911096k [mused,[m[m   842732k [mfree,[m[m   295616k [mbuffers[m[K
+Swap:[m[m  2097144k [mtotal,[m[m    56204k [mused,[m[m  2040940k [mfree,[m[m  1605880k [mcached[m[K
+[6;1H
+[7m  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND            [m[K
+[m    9 root      20   0     0    0    0 S  3.3  0.0   5298:19 ksoftirqd/1        [m
+[m32227 root      20   0  434m  31m 4468 S  2.0  0.9   0:45.20 python             [m
+[m32226 root      20   0  367m  31m 4460 S  1.7  0.9   0:37.71 python             [m
+[m32228 root      20   0  367m  30m 4452 S  1.7  0.8   0:38.01 python             [m
+[m    4 root      20   0     0    0    0 S  0.7  0.0   1135:15 ksoftirqd/0        [m
+[m 2335 root      20   0  263m  12m 3580 S  0.3  0.3   0:00.25 python             [m
+[m[m 2366 root      20   0 15144 1276  892 R  0.3  0.0   0:00.03 top                [m
+
+
+
+[m    5 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0        [m
+[m    6 root      RT   0     0    0    0 S  0.0  0.0   0:22.10 watchdog/0         [m
+[m    7 root      RT   0     0    0    0 S  0.0  0.0   0:09.76 migration/1        [m
+[m    8 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/1        [m
+[m   10 root      RT   0     0    0    0 S  0.0  0.0   0:19.50 watchdog/1         [m
+[m   11 root      RT   0     0    0    0 S  0.0  0.0   0:06.81 migration/2        [m
+[m   12 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/2        [m[6;1H[K[25;1H
+[root@localhost ~]# ls
+anaconda-ks.cfg  [0m[01;34mDocuments[0m           login.dmp  password.txt          [01;34mTemplates[0m
+[01;34mben[0m              [01;34mDownloads[0m           [01;34mmama100[0m    [01;34mPictures[0m              [01;34mtest[0m
+[01;34mbin[0m              install.log         method.py  [01;34mPublic[0m                test.sh
+[01;34mDesktop[0m          install.log.syslog  [01;34mMusic[0m      run_sql_20150825.sql  [01;34mVideos[0m
+[m[root@localhost ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/vda3              57G  7.0G   48G  13% /
+tmpfs                 7.8G  272K  7.8G   1% /dev/shm
+/dev/vda1             194M   32M  153M  17% /boot
+[root@localhost ~]#                                             [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Klogout
+Last login: Tue Dec  8 23:17:50 2015 from 172.24.42.71
+[root@localhost ~]# logout
+Last login: Tue Dec  8 23:18:21 2015 from 192.168.234.139
+[root@localhost ~]# ls
+anaconda-ks.cfg  [0m[01;34mDocuments[0m           login.dmp  password.txt          [01;34mTemplates[0m
+[01;34mben[0m              [01;34mDownloads[0m           [01;34mmama100[0m    [01;34mPictures[0m              [01;34mtest[0m
+[01;34mbin[0m              install.log         method.py  [01;34mPublic[0m                test.sh
+[01;34mDesktop[0m          install.log.syslog  [01;34mMusic[0m      run_sql_20150825.sql  [01;34mVideos[0m
+[m[root@localhost ~]# ls
+anaconda-ks.cfg  [0m[01;34mDocuments[0m           login.dmp  password.txt          [01;34mTemplates[0m
+[01;34mben[0m              [01;34mDownloads[0m           [01;34mmama100[0m    [01;34mPictures[0m              [01;34mtest[0m
+[01;34mbin[0m              install.log         method.py  [01;34mPublic[0m                test.sh
+[01;34mDesktop[0m          install.log.syslog  [01;34mMusic[0m      run_sql_20150825.sql  [01;34mVideos[0m
+[m[root@localhost ~]# i[Ko[Kl
+-bash: l: command not found
+[root@localhost ~]# ll
+total 236
+-rw-------. 1 root root  1294 Feb 27  2014 anaconda-ks.cfg
+drwxr-xr-x  3 root root  4096 Dec  1 18:54 [0m[01;34mben[0m
+drwxr-xr-x  2 root root  4096 Sep  2 15:12 [01;34mbin[0m
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mDesktop[0m
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mDocuments[0m
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mDownloads[0m
+-rw-r--r--. 1 root root 49000 Feb 27  2014 install.log
+-rw-r--r--. 1 root root 10151 Feb 27  2014 install.log.syslog
+-rw-r--r--  1 root root  6533 Sep  9 15:29 login.dmp
+drwxr-xr-x  3 root root  4096 Dec  1 18:47 [01;34mmama100[0m
+-rw-r--r--  1 root root   173 Nov 30 15:07 method.py
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mMusic[0m
+-rw-r--r--  1 root root 15969 Oct 23 10:33 password.txt
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mPictures[0m
+drwxr-xr-x. 3 root root  4096 Oct  1 18:16 [01;34mPublic[0m
+-rw-r--r--  1 root root 89196 Aug 25 19:44 run_sql_20150825.sql
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mTemplates[0m
+drwxr-xr-x  2 root root  4096 Sep 18 16:13 [01;34mtest[0m
+-rw-r--r--  1 root root    27 Nov  3 11:03 test.sh
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mVideos[0m
+[m[root@localhost ~]# pwd
+/root
+[root@localhost ~]# logout
+Last login: Tue Dec  8 23:25:34 2015 from 10.100.11.20
+[root@localhost ~]# ls
+anaconda-ks.cfg  [0m[01;34mDocuments[0m           login.dmp  password.txt          [01;34mTemplates[0m
+[01;34mben[0m              [01;34mDownloads[0m           [01;34mmama100[0m    [01;34mPictures[0m              [01;34mtest[0m
+[01;34mbin[0m              install.log         method.py  [01;34mPublic[0m                test.sh
+[01;34mDesktop[0m          install.log.syslog  [01;34mMusic[0m      run_sql_20150825.sql  [01;34mVideos[0m
+[m[root@localhost ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/vda3              57G  7.0G   48G  13% /
+tmpfs                 7.8G  272K  7.8G   1% /dev/shm
+/dev/vda1             194M   32M  153M  17% /boot
+[root@localhost ~]# l[Kll
+total 236
+-rw-------. 1 root root  1294 Feb 27  2014 anaconda-ks.cfg
+drwxr-xr-x  3 root root  4096 Dec  1 18:54 [0m[01;34mben[0m
+drwxr-xr-x  2 root root  4096 Sep  2 15:12 [01;34mbin[0m
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mDesktop[0m
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mDocuments[0m
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mDownloads[0m
+-rw-r--r--. 1 root root 49000 Feb 27  2014 install.log
+-rw-r--r--. 1 root root 10151 Feb 27  2014 install.log.syslog
+-rw-r--r--  1 root root  6533 Sep  9 15:29 login.dmp
+drwxr-xr-x  3 root root  4096 Dec  1 18:47 [01;34mmama100[0m
+-rw-r--r--  1 root root   173 Nov 30 15:07 method.py
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mMusic[0m
+-rw-r--r--  1 root root 15969 Oct 23 10:33 password.txt
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mPictures[0m
+drwxr-xr-x. 3 root root  4096 Oct  1 18:16 [01;34mPublic[0m
+-rw-r--r--  1 root root 89196 Aug 25 19:44 run_sql_20150825.sql
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mTemplates[0m
+drwxr-xr-x  2 root root  4096 Sep 18 16:13 [01;34mtest[0m
+-rw-r--r--  1 root root    27 Nov  3 11:03 test.sh
+drwxr-xr-x. 2 root root  4096 Feb 27  2014 [01;34mVideos[0m
+[m[root@localhost ~]# logout
+Last login: Tue Dec  8 23:32:11 2015 from 172.24.42.71
+[root@localhost ~]# ls
+anaconda-ks.cfg  [0m[01;34mDocuments[0m           login.dmp  password.txt          [01;34mTemplates[0m
+[01;34mben[0m              [01;34mDownloads[0m           [01;34mmama100[0m    [01;34mPictures[0m              [01;34mtest[0m
+[01;34mbin[0m              install.log         method.py  [01;34mPublic[0m                test.sh
+[01;34mDesktop[0m          install.log.syslog  [01;34mMusic[0m      run_sql_20150825.sql  [01;34mVideos[0m
+[m[root@localhost ~]# dir
+anaconda-ks.cfg  Documents	     login.dmp	password.txt	      Templates
+ben		 Downloads	     mama100	Pictures	      test
+bin		 install.log	     method.py	Public		      test.sh
+Desktop		 install.log.syslog  Music	run_sql_20150825.sql  Videos
+[root@localhost ~]# logout
+Last login: Tue Dec 15 14:48:25 2015 from 192.168.234.139
+[root@localhost ~]# ifconfig
+eth0      Link encap:Ethernet  HWaddr 52:54:00:76:2D:83  
+          inet addr:192.168.234.139  Bcast:192.168.234.255  Mask:255.255.255.0
+          inet6 addr: fe80::5054:ff:fe76:2d83/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:534700482 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:515398432 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:144993029419 (135.0 GiB)  TX bytes:121661771910 (113.3 GiB)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:42209872 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:42209872 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:7732897019 (7.2 GiB)  TX bytes:7732897019 (7.2 GiB)
+
+[root@localhost ~]# logout
+Last login: Tue Dec 15 10:56:43 2015 from 192.168.234.139
+[root@localhost ~]# ifconfig
+docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.17.42.1  netmask 255.255.0.0  broadcast 0.0.0.0
+        inet6 fe80::42:f5ff:feca:22c3  prefixlen 64  scopeid 0x20<link>
+        ether 02:42:f5:ca:22:c3  txqueuelen 0  (Ethernet)
+        RX packets 4412126  bytes 6937172578 (6.4 GiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 4072125  bytes 731491066 (697.6 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+enp0s29f0u2: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether e6:1f:13:57:6c:7f  txqueuelen 1000  (Ethernet)
+        RX packets 726714  bytes 47236410 (45.0 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+enp11s0f0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.233.2  netmask 255.255.255.0  broadcast 192.168.233.255
+        inet6 fe80::e61f:13ff:fe65:6c7c  prefixlen 64  scopeid 0x20<link>
+        ether e4:1f:13:65:6c:7c  txqueuelen 1000  (Ethernet)
+        RX packets 43378421  bytes 36494166860 (33.9 GiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 35073341  bytes 11011386998 (10.2 GiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+enp11s0f1: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        ether e4:1f:13:65:6c:7e  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 0  (Local Loopback)
+        RX packets 1553  bytes 667894 (652.2 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1553  bytes 667894 (652.2 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+veth8772d7d: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::1894:71ff:fe0d:5766  prefixlen 64  scopeid 0x20<link>
+        ether 1a:94:71:0d:57:66  txqueuelen 0  (Ethernet)
+        RX packets 3746904  bytes 6277256075 (5.8 GiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 3438336  bytes 602926022 (574.9 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+vetha89c77a: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::60b6:75ff:fec7:70c5  prefixlen 64  scopeid 0x20<link>
+        ether 62:b6:75:c7:70:c5  txqueuelen 0  (Ethernet)
+        RX packets 63916  bytes 4572873 (4.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 63916  bytes 3439546 (3.2 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+vethdc459d5: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::289c:bfff:fed9:5560  prefixlen 64  scopeid 0x20<link>
+        ether 2a:9c:bf:d9:55:60  txqueuelen 0  (Ethernet)
+        RX packets 45  bytes 3854 (3.7 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 102  bytes 36650 (35.7 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+[root@localhost ~]# ll
+total 12
+-rw-------. 1 root root 1223 Nov 24 13:51 anaconda-ks.cfg
+-rw-r--r--. 1 root root 4778 Nov 26 10:49 motd
+[root@localhost ~]# ll
+total 12
+-rw-------. 1 root root 1223 Nov 24 13:51 anaconda-ks.cfg
+-rw-r--r--. 1 root root 4778 Nov 26 10:49 motd
+[root@localhost ~]# logout

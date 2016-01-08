@@ -1,0 +1,452 @@
+try-----
+try-----
+192.168.2.13:没有密码
+try-----
+Exception in thread Thread-18:
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/usr/local/lib/python2.7/threading.py", line 763, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "result.py.v7", line 86, in jieguo
+    jieguo2=try_ssh(ip,'root',password)
+  File "result.py.v7", line 61, in try_ssh
+    for i in dict_jieguo['process_type1']:
+TypeError: 'bool' object is not iterable
+
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.22','message-center')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.22','mkt')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.23','mkt')
+try-----
+Exception in thread Thread-25:
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/usr/local/lib/python2.7/threading.py", line 763, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "result.py.v7", line 86, in jieguo
+    jieguo2=try_ssh(ip,'root',password)
+  File "result.py.v7", line 61, in try_ssh
+    for i in dict_jieguo['process_type1']:
+TypeError: 'bool' object is not iterable
+
+try-----
+192.168.2.27:没有密码
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.29','mkt')
+192.168.2.31:没有密码
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.33','mkt')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.33','mktrun')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.33','shell')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.33','sso')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.34','message')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.34','message-center')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.34','orderService')
+try-----
+try-----
+try-----
+try-----
+192.168.2.39:没有密码
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.50','orderServiceNewVersion')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.51','hyt')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.51','hyt_mobile')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.51','op-sns')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.51','web-job')
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.53','wmall')
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.55','baoai')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.55','opadapter')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.55','op-sns')
+try-----
+192.168.2.58:没有密码
+try-----
+try-----
+try-----
+try-----
+192.168.2.63:没有密码
+192.168.2.64:没有密码
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.68','wmall')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.68','wxapppay')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.68','wxpay')
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.76','pre-release')
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.84','noticeService')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.84','orderService')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.84','transaction')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.84','transaction_new')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.84','transaction-xa')
+try-----
+try-----
+try-----
+try-----
+192.168.2.89:没有密码
+192.168.2.90:没有密码
+try-----
+192.168.2.92:没有密码
+try-----
+192.168.2.94:没有密码
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.96','campaign-domain')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.96','pre-campaign-domain')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.97','campaign-domain')
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.100','wmall')
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.105','biostime-coupon-web')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.106','biostime-coupon-web')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.106','coupon')
+try-----
+Exception in thread Thread-216:
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/usr/local/lib/python2.7/threading.py", line 763, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "result.py.v7", line 86, in jieguo
+    jieguo2=try_ssh(ip,'root',password)
+  File "result.py.v7", line 61, in try_ssh
+    for i in dict_jieguo['process_type1']:
+TypeError: 'bool' object is not iterable
+
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.109','coupon')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.109','coupon_rpc')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.109','coupon_rpc_query')
+try-----
+try-----
+try-----
+try-----
+192.168.2.114:没有密码
+192.168.2.116:没有密码
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.117','wxapppay')
+insert into cmdb_project_auto(ip,project) values ('192.168.2.117','wxpay')
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.120','domain_hyt_pre')
+192.168.2.121:没有密码
+192.168.2.122:没有密码
+192.168.2.123:没有密码
+192.168.2.124:没有密码
+try-----
+192.168.2.126:没有密码
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.134','couponcampaign')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.2.135','couponcampaign')
+try-----
+192.168.2.142:没有密码
+192.168.2.143:没有密码
+try-----
+try-----
+try-----
+192.168.2.184:没有密码
+192.168.2.185:没有密码
+192.168.2.186:没有密码
+192.168.2.189:没有密码
+try-----
+try-----
+try-----
+try-----
+192.168.2.212:没有密码
+192.168.2.219:没有密码
+192.168.2.221:没有密码
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.13','pre-release')
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.20','glassfish')
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.30','coupon-mama100-web')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.30','coupon_rpc')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.30','coupon_rpc_query')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.31','coupon_rpc')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.32','crm-web')
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.34','biostime-coupon-web')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.35','coupon-mama100-web')
+192.168.234.36:没有密码
+192.168.234.37:没有密码
+192.168.234.38:没有密码
+192.168.234.39:没有密码
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.40','coupon_rpc')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.41','coupon_rpc')
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.44','mcs-web-server')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.45','mcs-web-server')
+try-----
+try-----
+192.168.234.48:没有密码
+192.168.234.49:没有密码
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.62','cust-rpc')
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.72','cust-rpc')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.73','message-center')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.74','message-center')
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.76','alipay')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.76','alipay_pre')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.76','pay-notify')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.76','pay-notify_pre')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.76','unionpay')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.76','unionpay_pre')
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.85','message-center')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.86','alipay')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.86','pay-notify')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.86','unionpay')
+try-----
+try-----
+Exception in thread Thread-649:
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/usr/local/lib/python2.7/threading.py", line 763, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "result.py.v7", line 86, in jieguo
+    jieguo2=try_ssh(ip,'root',password)
+  File "result.py.v7", line 61, in try_ssh
+    for i in dict_jieguo['process_type1']:
+TypeError: 'bool' object is not iterable
+
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.89','pv-collector')
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.92','cust-rpc')
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.95','message-center')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.96','mkt')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.97','wmall')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.98','mkf-incubator')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.98','mkf-incubator-prd')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.99','monitor-center')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.99','pv-collector')
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.102','cust-rpc')
+192.168.234.103:没有密码
+try-----
+try-----
+Exception in thread Thread-698:
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/usr/local/lib/python2.7/threading.py", line 763, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "result.py.v7", line 86, in jieguo
+    jieguo2=try_ssh(ip,'root',password)
+  File "result.py.v7", line 61, in try_ssh
+    for i in dict_jieguo['process_type1']:
+TypeError: 'bool' object is not iterable
+
+try-----
+192.168.234.107:没有密码
+192.168.234.108:没有密码
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.113','cust-growth-rpc')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.113','cust-growth-rpc-pre')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.113','rpc-grouppurchase')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.113','rpc-grouppurchase-1.1')
+try-----
+try-----
+try-----
+try-----
+try-----
+192.168.234.119:没有密码
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.122','cust-growth-rpc')
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.127','webstat')
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+try-----
+192.168.234.138:没有密码
+try-----
+try-----
+192.168.234.141:没有密码
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.142','pre-release')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.142','sns-rpc')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.142','sns-rpc2')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.142','sns-rpc3')
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.147','webstat')
+try-----
+try-----
+try-----
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.152','pre-release')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.152','sns-rpc')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.152','sns-rpc2')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.152','sns-rpc3')
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.154','PAS_CFG')
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.156','opmbiz')
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.157','middle')
+192.168.234.158:没有密码
+try-----
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.160','order-rpc')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.160','pre_order-rpc')
+try-----
+192.168.234.163:没有密码
+try-----
+192.168.234.165:没有密码
+try-----
+try-----
+try-----
+192.168.234.169:没有密码
+try-----
+insert into cmdb_project_auto(ip,project) values ('192.168.234.170','order-rpc')
+insert into cmdb_project_auto(ip,project) values ('192.168.234.170','pre_order-rpc')
+192.168.234.171:没有密码
+192.168.234.172:没有密码
+192.168.234.201:没有密码
+192.168.234.202:没有密码
+192.168.234.203:没有密码
+192.168.234.204:没有密码
+192.168.234.205:没有密码
+192.168.234.206:没有密码
+try-----
+try-----
+try-----
+192.168.234.240:没有密码
+192.168.234.241:没有密码

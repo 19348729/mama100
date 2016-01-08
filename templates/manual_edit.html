@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>手工添加服务器相关信息</title>
+
+
+		<link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/static/assets/css/font-awesome.min.css" />
+
+		<link rel="stylesheet" href="/static/assets/css/jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/chosen.css" />
+		<link rel="stylesheet" href="/static/assets/css/datepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/bootstrap-timepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/daterangepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/colorpicker.css" />
+
+		<link rel="stylesheet" href="/static/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/ace-skins.min.css" />
+
+		<script src="/static/assets/js/ace-extra.min.js"></script>
+</head>
+
+<body>
+    <form class="form-search form-horizontal"  method="post" action="manualAdd">
+            <h1>手工添加服务器相关信息<h1>
+
+            <label class="col-sm-3 control-label no-padding-right" > 物理机ip地址: </label>
+                <input name="ip" type="text" id="form-field-1" value="{{hostinfo.ip}}"  /><br>
+            <label class="col-sm-3 control-label no-padding-right"  > 上架时间: </label>
+                <input name="onload_time" type="date" id="form-field-1" value="{{hostinfo.online_time|date:"Y-m-d"}}" /><br>
+            <label  class="col-sm-3 control-label no-padding-right" > 机柜编号: </label>
+                <select name="jigui_number"  style="font-size:18px;"  >
+                    {%  for i in jigui_list %}
+                        {%  if hostinfo.jigui_number == i %}
+                            <option value={{ i }}  selected = "selected">{{ i }}</option>
+                        {%  else %}
+                            <option value={{ i }} >{{ i }}</option>
+                        {%  endif %}
+                    {% endfor %}
+
+                </select><br>
+
+            <label  class="col-sm-3 control-label no-padding-right" > 空间大小: </label>
+                <select name="u_size"  style="font-size:18px;">
+                    {%  for i in hostsize_list %}
+                        {%  if hostinfo.u_size == i %}
+                            <option value={{ i }}  selected = "selected">{{ i }}</option>
+                        {%  else %}
+                            <option value={{ i }} >{{ i }}</option>
+                        {%  endif %}
+                    {% endfor %}
+                </select><br>
+            <label class="col-sm-3 control-label no-padding-right" > 品牌: </label>
+
+                <select name="brand"  style="font-size:18px;">
+                    {%  for i in brand_list %}
+                        {%  if hostinfo.brand == i %}
+                            <option value={{ i }}  selected = "selected">{{ i }}</option>
+                        {%  else %}
+                            <option value={{ i }} >{{ i }}</option>
+                        {%  endif %}
+                    {% endfor %}
+                </select><br>
+            <label class="col-sm-3 control-label no-padding-right" > 资产编号: </label>
+                <input name="other1" type="text" id="form-field-1" value="{{hostinfo.other1}}" />
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="icon-ok bigger-110"></i>
+                    Submit
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="icon-undo bigger-110"></i>
+                    Reset
+                </button>
+            </div>
+        </div>
+    </form>
+							
+
+</body>
+</html>

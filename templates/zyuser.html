@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Bootstrap表单组件 - Bootstrap后台管理系统模版Ace下载</title>
+		<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
+		<meta name="description" content="站长素材提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- basic styles -->
+
+		<link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/static/assets/css/font-awesome.min.css" />
+
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="/static/assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+		<!-- page specific plugin styles -->
+
+		<link rel="stylesheet" href="/static/assets/css/jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/chosen.css" />
+		<link rel="stylesheet" href="/static/assets/css/datepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/bootstrap-timepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/daterangepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/colorpicker.css" />
+
+		<!-- fonts -->
+
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
+		<!-- ace styles -->
+
+		<link rel="stylesheet" href="/static/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/ace-skins.min.css" />
+
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="/static/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+
+		<script src="/static/assets/js/ace-extra.min.js"></script>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="/static/assets/js/html5shiv.js"></script>
+		<script src="/static/assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+<body>
+<span id="memoryinfo"  hidden='hidden'>{{memoryinfo}}</span>
+<span id="memclock" hidden='hidden'  >{{ memclock}}</span>
+<span id="cpuinfo" hidden='hidden'>{{cpuinfo}}</span>
+<span id="cpuclock" hidden='hidden'>{{cpuclock}}</span>
+
+<form class="form-inline definewidth m20" action="zyuser" method="get">
+    &nbsp;&nbsp;&nbsp;&nbsp;主机资源图IP：
+    <input type="text" name="ip" id=""class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
+</form>
+
+       <div id="mem" style="height:500px;width:700px;margin: auto;"></div>
+        <div id="cpu" style="height:500px;width:700px;margin: auto;"></div>
+
+<script src="/static/js/echarts.js"></script>
+
+  <script>
+  /**
+* Created by DELL on 2015/12/5.
+*/
+    //var cpuinfo=document.getElementById("cpuinfo").innerText
+    //var cpuclock=document.getElementById("cpuclock").innerHTML
+    //alert(cpuinfo+"ppp"+cpuclock);
+        require.config({
+            paths: {
+                echarts: '/static/js/dist'
+            }
+        });
+        require(
+            [
+                'echarts',
+                'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+                'echarts/chart/pie'
+            ],
+                 function (ec) {
+                var myChart = ec.init(document.getElementById('cpu'));
+                var option = {
+                    title: {
+                        text: 'CPU资源使用',
+                        subtext: ''
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['CPU资源使用']
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {show: true, type: ['line', 'bar']},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            boundaryGap: false,
+
+                            data: [{% for value in cpuclock %}
+                                '{{ value }}',
+                            {% endfor %}
+                            ]
+
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            axisLabel: {
+                                formatter: '{value} '
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            name: 'CPU资源使用',
+                            type: 'line',
+
+                            data: [{% for value in cpuinfo %}
+                                {{ value }},
+                            {% endfor %}
+                            ],
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine: {
+                                data: [
+                                    {type: 'average', name: '平均值'}
+                                ]
+                            }
+                        },
+                    ]
+                };
+                myChart.setOption(option);
+            }
+        );
+
+
+
+
+
+
+  </script>
+<script>
+  /**
+* Created by DELL on 2015/12/5.
+*/
+    //var cpuinfo=document.getElementById("cpuinfo").innerText
+    //var cpuclock=document.getElementById("cpuclock").innerHTML
+    //alert(cpuinfo+"ppp"+cpuclock);
+        require.config({
+            paths: {
+                echarts: '/static/js/dist'
+            }
+        });
+        require(
+            [
+                'echarts',
+                'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+                'echarts/chart/pie'
+            ],
+                 function (ec) {
+                var myChart = ec.init(document.getElementById('mem'));
+                var option = {
+                    title: {
+                        text: 'Memory资源使用',
+                        subtext: ''
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['Memory资源使用']
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {show: true, type: ['line', 'bar']},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            boundaryGap: false,
+
+                            data: [{% for value in memclock %}
+                                '{{ value }}',
+                            {% endfor %}
+                            ]
+
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            axisLabel: {
+                                formatter: '{value} '
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            name: 'Memory资源使用',
+                            type: 'line',
+
+                            data: [{% for value in memoryinfo %}
+                                {{ value }},
+                            {% endfor %}
+                            ],
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine: {
+                                data: [
+                                    {type: 'average', name: '平均值'}
+                                ]
+                            }
+                        },
+                    ]
+                };
+                myChart.setOption(option);
+            }
+        );
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+	<head>
+		<meta charset="utf-8" />
+		<title >配置文件编辑</title>
+
+
+		<link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/static/assets/css/font-awesome.min.css" />
+        <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="/static/assets/css/jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/chosen.css" />
+		<link rel="stylesheet" href="/static/assets/css/datepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/bootstrap-timepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/daterangepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/colorpicker.css" />
+        <link rel="stylesheet" href="/static/assets/css/bootstrap-duallistbox.css" />
+        <link rel="stylesheet" href="/static/assets/css/prettify.css" />
+
+		<link rel="stylesheet" href="/static/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/ace-skins.min.css" />
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script src="/static/js/jquery.bootstrap-duallistbox.js"></script>
+		<script src="/static/assets/js/ace-extra.min.js"></script>
+        <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+       <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    	<div class="table-header" align="center" >
+											<h1 align="center" ><font color="#7fff00" > 配置文件修改</font></h1>
+										</div>
+    <form class="form-search form-horizontal"  method="post" action="config_info_commit">
+{#                <h1 align="center" ><font color="#00008b" > 配置文件编辑</font></h1>#}
+    <br>
+    <div align="center">
+{#              <label class="col-sm-3 control-label no-padding-right"  > 文件列表: </label>#}
+              <h3><font color="#1e90ff"> 请选择:</font></h3><select name="file_name" onchange="get_context(this)">
+                    <option></option>
+                    {%  for i in find_dir_list %}
+                        <option value={{ i }} >{{ i }}</option>
+                    {% endfor %}
+                </select>
+{#        </div>#}
+        <br>
+        <br>
+
+    <textarea class="form-control" name='filename_cont' style='border: 1px solid #94BBE2;width:85%;resize:none;' onpropertychange='this.style.posHeight=this.scrollHeight' rows="25" id=textarea onfocus='textarea.style.posHeight=this.scrollHeight'></textarea>
+</br>
+            <button class="btn btn-info" type="submit" >
+                <i class="icon-ok bigger-110"></i>
+                提交
+            </button>
+
+            &nbsp; &nbsp; &nbsp;
+</div>
+
+</form>
+<script>
+     function get_context(btnthis) {
+         $.get('get_file_info',{
+             file_name:$(btnthis).val()
+         },function(response){
+                     $('#textarea').val(response);
+                 }
+     )
+     };
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Basic Embedding Gate One</title>
+    <script src="/static/js/gateone.js"></script>
+    <script src="/static/assets/js/jquery-2.0.3.min.js"></script>
+
+
+{#      GATEONE正常代码#}
+{#    <script>#}
+{#      window.onload = function() {#}
+{#          // Initialize Gate One:#}
+{#          GateOne.init({url: 'https://192.168.234.139'});#}
+{#      }#}
+{##}
+{#    </script>#}
+
+
+      <script>
+
+
+          var ws = new WebSocket("ws://192.168.234.139:5050/wssh");
+
+            ws.onopen = function()
+            {
+              console.log("open");
+              ws.send("sdf");
+
+            };
+            ws.onmessage = function(evt)
+            {
+                alert(evt.data)
+                $(function() {
+                    alert($('#nb').val(evt.data))
+                })
+              console.log(evt.data)
+                 ws.send("hello");
+            };
+            ws.onclose = function(evt)
+            {
+              console.log("WebSocketClosed!");
+            };
+            ws.onerror = function(evt)
+            {
+              console.log("WebSocketError!");
+            };
+
+      </script>
+
+
+
+  </head>
+  <body>
+<!-- Decide where you want to put Gate One -->
+{#    <div id="gateone_container" style="position: relative; width: 60em; height: 30em;">#}
+{#        <div id="gateone"></div>#}
+{#    </div>#}
+  hao: <input id="nb" value="adf">
+  </body>
+</html>

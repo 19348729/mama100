@@ -1,0 +1,199 @@
+#!/usr/local/bin/python
+#*- coding: UTF-8 -*-
+from  multiprocessing import Process
+#from  mysql_run import *
+
+from password_mysql import *
+import paramiko
+import threading
+import os
+import ping
+import pexpect
+import exceptions
+import json
+from encrypt import *
+from  datetime  import  *
+import time
+#run_commd='''free -m|grep Mem|awk '{print $2}';fdisk -l|grep 'da'|awk -F: '{print $2}'|awk '{print $1}'|sed -n '1p';grep processor /proc/cpuinfo |wc -l;ip addr list |grep -w inet|awk '{print $2}'|cut -d/ -f1|grep -v 127|grep -v 169.254|grep -v 10.10;ps -ef |grep java|grep -v grep|grep glassfish|awk '{print $(NF-2)}'|awk -F/ '{print $NF}';ps -ef |grep nginx|awk '{print $1}'|grep -w nginx|sed -n "1p"'''
+
+
+get_mem='free -m|grep Mem|awk \'{print $2}\''
+get_disk='fdisk -l|grep "da"|awk -F: \'{print $2}\'|awk \'{print $1}\'|sed -n 1p'
+get_cpu='cat /proc/cpuinfo |grep "model name"|awk \'{print $NF}\' |sort -u;echo ",";cat /proc/cpuinfo |grep processor|wc -l;echo "核"'
+get_ip='ip addr list |grep -w inet|awk \'{print $2}\'|cut -d/ -f1|grep -v 127|grep -v 169.254|grep -v 10.10'
+#get_process='ps -ef |grep -E "keepalived|nginx|redis|glassfish|mysql|rpc|zookeeper|tomcat|mongodb|zipkin" |grep -v grep|awk \'{print $NF}\'|sort -u'
+get_process='ps -ef|sort -u'
+get_mac='ifconfig |grep HWaddr|cut -b 42-'
+get_sn='dmidecode -t 1|grep \'Serial Number\'|awk \'{print $3}\''
+get_kvm='dmidecode -t 1|grep "Product Name"|awk -F: \'{print$2}\''
+get_os_type='cat /etc/issue|awk \'NR==1{print}\'|awk -F \'\\\' \'{print $1}\''
+
+
+####把上面命令转换成字典
+def list_to_str(list_a):
+        p=""
+        for i in list_a:
+                b=str(i)
+                if '192' in b:
+                        p=b
+        dict_a={}
+        dict_a['mem']=list_a[0]
+        dict_a['disk']=list_a[1]
+        dict_a['cpu']=list_a[2]
+        dict_a['ip_list']=list_a[3:list_a.index(p)+1]
+        dict_a['process_type']=list_a[list_a.index(p)+1:-2]
+        dict_a['get_sn']=list_a[6]
+        dict_a['get_mac']=list_a[5]
+        dict_a['get_kvm']=list_a[7]
+        dict_a['get_os_type']=list_a[8]
+        return dict_a
+
+
+
+##遇到第一次连接的主机时去掉ssh的yes提示
+def del_yes(ip):
+	cmd="ssh root@"+ip
+	child = pexpect.spawn(cmd) 
+  	index = child.expect(['connecting','password',pexpect.EOF,pexpect.TIMEOUT],timeout=-1)  
+	if index == 0: 
+		child.sendline('yes\n') 
+
+###真正去ssh服务器执行脚本返回执行结果
+def run_ssh(ip,username,password,cmd):
+	try:
+		ssh=paramiko.SSHClient()
+		known_hosts='/root/.ssh/known_hosts'
+		#print ip,username,password,cmd
+		ssh.load_system_host_keys(known_hosts)
+		ssh.connect(hostname=ip,username=username,password=password)
+		stdin,stdout,stderr=ssh.exec_command(cmd)
+		return stdout.read().strip()	
+	except:
+		print "%s:password error" %ip
+		return False
+
+####把字典中的KEY和VALUE调用run_shh函数执行，新得到一个字典
+def try_ssh(a,b,c):
+	try:
+		del_yes(a)
+		dict_jieguo={}
+		dict_jieguo['cpu']=run_ssh(a,b,c,get_cpu)
+		wodini=run_ssh(a,b,c,get_cpu)
+		print "~~~~~~~~~%s~~~~~"%wodini
+		#print wodini,type(wodini),len(wodini)
+		if dict_jieguo['cpu']:
+			pass
+		else:
+			return False
+		dict_jieguo['mem']=run_ssh(a,b,c,get_mem)
+		dict_jieguo['disk']=run_ssh(a,b,c,get_disk)
+		dict_jieguo['ip']=run_ssh(a,b,c,get_ip)
+		dict_jieguo['process_type']=run_ssh(a,b,c,get_process)
+		dict_jieguo['snumber']=run_ssh(a,b,c,get_sn)
+		dict_jieguo['mac']=run_ssh(a,b,c,get_mac)
+		dict_jieguo['vorw']=run_ssh(a,b,c,get_kvm)
+		dict_jieguo['get_os_type']=run_ssh(a,b,c,get_os_type)
+		return dict_jieguo
+	except  paramiko.AuthenticationException:
+		print "%s:password error"%a
+###截取进程类型
+def process(k):
+	c=''
+	biao=['nginx','redis','glassfish','rpc','keepalive','zookeeper','mysql','oracle','zookeeper','hadoop','flume']
+	for i in biao:
+		if i in str(k):
+			c=c+i+' '
+	if c=='':
+		return 'null'
+	else:
+		return c
+	
+###把结果写入数据库
+def insert_mysql(ip,b):
+	#print "bengin................"
+	#print b
+	cpu=str(b['cpu']).replace("\n","")
+	disk=str(b['disk']).replace("\n","")
+	#memm=int(b['mem']).replace("\n","")
+	memm=int(b['mem'])
+	mem=str(int(round(memm/1000.0)))+'G'
+	#mem=int(round(memm/1000.0))
+	process_type=process(b['process_type'])
+	ip_list=str(b['ip']).replace("',","").replace("'","").replace("[","").replace("]","").replace("\n"," ")
+	#process_type=str(b['glassfish']).replace("',","").replace("'","").replace("[","").replace("]","").replace("\n"," ")
+#	nginx=str(b['nginx']).replace("',","").replace("'","").replace("[","").replace("]","").replace("\n","")
+	get_mac=str(b['mac']).replace("\n","")
+	get_os_type=str(b['get_os_type']).replace("\n","")
+	snumber=str(b['snumber']).replace("\n","")
+	get_kvm=str(b['vorw']).replace("\n","")
+	if 'KVM' in get_kvm:
+		kvm="虚拟机"
+	else:
+		kvm="物理机"
+
+	sql='insert into cmdb_auto_info(ip,cpu,disk,mem,ip_list,has_process,mac,vorw,os_type,snumber) values ("'+ip+'","'+cpu+'","'+disk+'","'+mem+'","'+ip_list+'",'+'"'+process_type+'",'+'"'+get_mac+'",'+'"'+kvm+'",'+'"'+get_os_type+'","'+snumber+'")'
+	conn_mysql(sql)
+
+def jieguo(ip):
+	pingip=ping.quiet_ping(ip,count=1) ###快速静默PING，只发一个包
+	if pingip[0] == 0:
+		#password=decrypt_password(ip)
+		try:
+			password=decrypt(138,password_all[ip]) ###原来从数据库查询，现在改为从字典中查询
+			if password:
+				jieguo2=try_ssh(ip,'root',password)	
+				if jieguo2:
+					insert_mysql(ip,jieguo2)
+		except  KeyError:
+			print "%s:没有密码"%ip
+		#else:
+		#	print "%s:no password"%ip
+	else:
+		pass
+		print "%s:not ok"%ip
+def active():
+#       for i in range(1,250):
+#               ip='192.168.115.'+str(i)
+#               p=threading.Thread(target=jieguo,args=(ip,))
+#               p.start()
+#               p.join()
+#       for i in range(1,250):
+#               ip='192.168.234.'+str(i)
+#               p=threading.Thread(target=jieguo,args=(ip,))
+#               p.start()
+#               p.join()
+        for i in ['192.168.233.2','192.168.233.3','192.168.2.24']:
+                p=threading.Thread(target=jieguo,args=(i,))
+                p.start()
+                p.join()
+
+
+###从数据库取出所有的密码和IP对应关系，返回一个字典d
+def get_all_password():
+	temp_password={}
+	sql='select ip,password from hostpasswd'
+	temp_result=conn_mysql(sql)
+	for i in temp_result:
+		temp_password[i[0]]=i[1]
+	return temp_password
+
+
+#####一次性把密码取到字典中
+password_all={}
+password_all=get_all_password()
+#print datetime.today()
+
+
+old_host = 'select ip from cmdb_auto_info'
+old_ip=conn_mysql(old_host)
+f=file('old_ip.json','wb')
+json.dump(old_ip,f)
+f.close()
+#sql='delete from cmdb_auto_info'
+#conn_mysql(sql)
+active()
+new_host = 'select ip from cmdb_auto_info'
+new_ip=conn_mysql(new_host)
+f=file('new_ip.json','wb')
+json.dump(new_ip,f)
+f.close()

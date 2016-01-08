@@ -1,0 +1,10 @@
+anaconda-ks.cfg  [0m[01;34mDocuments[0m           login.dmp  password.txt          [01;34mTemplates[0m
+[01;34mben[0m              [01;34mDownloads[0m           [01;34mmama100[0m    [01;34mPictures[0m              [01;34mtest[0m
+[01;34mbin[0m              install.log         method.py  [01;34mPublic[0m                test.sh
+[01;34mDesktop[0m          install.log.syslog  [01;34mMusic[0m      run_sql_20150825.sql  [01;34mVideos[0m
+[m[root@localhost ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/vda3              57G  7.0G   48G  13% /
+tmpfs                 7.8G  272K  7.8G   1% /dev/shm
+/dev/vda1             194M   32M  153M  17% /boot
+[root@localhost ~]# 

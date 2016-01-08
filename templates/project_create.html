@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>项目新建立</title>
+		<link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/static/assets/css/font-awesome.min.css" />
+        <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="/static/assets/css/jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/chosen.css" />
+		<link rel="stylesheet" href="/static/assets/css/datepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/bootstrap-timepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/daterangepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/colorpicker.css" />
+        <link rel="stylesheet" href="/static/assets/css/bootstrap-duallistbox.css" />
+        <link rel="stylesheet" href="/static/assets/css/prettify.css" />
+
+		<link rel="stylesheet" href="/static/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/ace-skins.min.css" />
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script src="/static/js/jquery.bootstrap-duallistbox.js"></script>
+		<script src="/static/assets/js/ace-extra.min.js"></script>
+</head>
+
+<body>
+    <form class="form-search form-horizontal"  method="post" action="project_create_commit">
+            <h3>项目新建立</h3>
+
+            <label class="col-sm-3 control-label no-padding-right"  > 架构分类: </label>
+               <select name="jg_name" style="font-size:16px;">
+                    {%  for i in jg_name %}
+                            <option value={{ i }} >{{ i }}</option>
+                    {% endfor %}
+                </select><br>
+          <label class="col-sm-3 control-label no-padding-right" > 项目名: </label>
+                <input name="project_name" type="text" id="form-field-1" value=""  /><br>
+
+            <label class="col-sm-3 control-label no-padding-right"  > 上线时间: </label>
+                <input name="online_time" type="date" id="form-field-1" value="" /><br>
+
+         <label class="col-sm-3 control-label no-padding-right" > 开发负责人: </label>
+            <input name="kaifa_man" type="text" id="form-field-1" value=""  /><br>
+
+          <label class="col-sm-3 control-label no-padding-right" > 软件名称关键字: </label>
+              <input name="soft_name" type="text" id="form-field-1" value="" /><br>
+
+        
+          <label class="col-sm-3 control-label no-padding-right"  > 软件类型: </label>
+               <select name="soft_type" style="font-size:16px;">
+                    {%  for i in soft_type %}
+                        {%  if cmdb_project.soft_type == i %}
+                            <option value={{ i }}  selected = "selected">{{ i }}</option>
+                        {%  else %}
+                            <option value={{ i }} >{{ i }}</option>
+                        {%  endif %}
+                    {% endfor %}
+                </select><br>
+         <label class="col-sm-3 control-label no-padding-right"  > 环境: </label>
+               <select name="ent_type" style="font-size:16px;">
+                    {%  for i in ent_type %}
+                        {%  if cmdb_project.ent_type == i %}
+                            <option value={{ i }}  selected = "selected">{{ i }}</option>
+                        {%  else %}
+                            <option value={{ i }} >{{ i }}</option>
+                        {%  endif %}
+                    {% endfor %}
+                </select><br>
+
+            <label class="col-sm-3 control-label no-padding-right" > 节点IP: </label>
+                    <div class="col-md-7">
+
+                              <select multiple="multiple" size="10" name="nodeip" class="demo1">
+                                {% for i in ip_list %}
+                                  <option value="{{i}}">{{i}}</option>
+
+                                {% endfor %}
+
+                              </select>
+                              <script>
+                                var demo4 = $('.demo1').bootstrapDualListbox({
+                                  selectedListLabel: 'Selected',
+                                  preserveSelectionOnMove: 'moved',
+                                  moveOnSelect: false,
+                                });
+                              </script>
+                    </div>
+
+
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="icon-ok bigger-110"></i>
+                    Submit
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="icon-undo bigger-110"></i>
+                    Reset
+                </button>
+            </div>
+        </div>
+    </form>
+
+
+</body>
+</html>

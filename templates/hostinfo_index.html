@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>主机基本信息</title>
+
+		<link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/static/assets/css/ace.min.css" />
+		<script src="/static/assets/js/jquery-2.0.3.min.js"></script>
+		<script src="/static/js/jquery.cookie.js"></script>
+		<script src="/static/assets/js/jquery.dataTables.min.js"></script>
+		<script src="/static/assets/js/jquery.dataTables.bootstrap.js"></script>
+    </head>
+
+    <body>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-book"></i> Results For This List
+                        <span class="pull-right">
+                            IP LIST：<input id="cb4" type="checkbox" checked onclick="toggleColumn(event,4);">&nbsp;&nbsp;&nbsp;
+                            OS Type：<input id="cb6" type="checkbox" checked onclick="toggleColumn(event,6);">&nbsp;&nbsp;&nbsp;
+                        </span>
+                </h3>
+            </div>
+            <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>IP</th>
+                        <th>CPU</th>
+                        <th>MEMERY</th>
+                        <th>DISKINFO</th>
+                        <th>IP LIST</th>
+                        <th>Process Info</th>
+                        <th>OS Type</th>
+                        <th>Virtual or Physical</th>
+                        <th>Parent IP</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for i in contacts %}
+                        <tr>
+                            <td>{{i.ip}}</td>
+                            <td>{{i.cpu}}</td>
+                            <td>{{i.mem}}</td>
+                            <td>{{i.disk}}G</td>
+                            <td>{{i.ip_list}}</td>
+                            <td>{{ i.has_process }}</td>
+                            <td>{{i.os_type}}</td>
+                            <td>{{i.vorw}}</td>
+                            <td>{{ i.parent_ip }}</td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+
+		</div>
+
+        {#表格数据处理#}
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sample-table-2').DataTable(
+                    {
+                    stateSave: true
+                    });
+        } );
+        </script>
+{#处理列显示函数#}
+        <script>
+            function toggleColumn(e, i){
+                var t = e.target.checked;
+                var e = $('#sample-table-2 tr').find('th:eq(' + i + '),td:eq(' + i +')');
+                if(t === true){
+                    e.show();
+                } else {
+                    e.hide();
+                }
+                $.cookie('td' + i, t === true ? 1 : 0, {expires:365, path:'/'});
+            }
+            $(function() {
+                var arr = [4,6];
+                for (var i = 0; i < arr.length; i++) {
+                    var v = arr[i];
+                    var t = $.cookie('td' + v);
+                    if (t == 0) {
+                        $('#cb' + v).attr("checked", false);
+                        $('#sample-table-2 tr').find('th:eq(' + v + '),td:eq(' + v + ')').hide();
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

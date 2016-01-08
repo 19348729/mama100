@@ -1,0 +1,9 @@
+<body>
+    <span id="vhost" hidden="hidden">{{vhost}}</span>
+	<span id="whost" hidden="hidden" >{{whost}}</span>
+    <div id="main" style="height:400px;width:500px;float:right;"></div>
+    <div id="vsum" style="height:400px;width:500px;float:right;"></div>
+    <script src="/static/js/echarts.js"></script>
+  <script src="/static/js/hostsum.js"></script>
+  <script src="/static/js/vsum.js"></script>
+</body>

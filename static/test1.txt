@@ -1,0 +1,88 @@
+Last login: Tue Dec  8 11:50:42 2015 from 192.168.234.139
+[root@localhost ~]# ls
+anaconda-ks.cfg  [0m[01;34mDocuments[0m           login.dmp  password.txt          [01;34mTemplates[0m
+[01;34mben[0m              [01;34mDownloads[0m           [01;34mmama100[0m    [01;34mPictures[0m              [01;34mtest[0m
+[01;34mbin[0m              install.log         method.py  [01;34mPublic[0m                test.sh
+[01;34mDesktop[0m          install.log.syslog  [01;34mMusic[0m      run_sql_20150825.sql  [01;34mVideos[0m
+[m[root@localhost ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/vda3              57G  7.0G   48G  13% /
+tmpfs                 7.8G  272K  7.8G   1% /dev/shm
+/dev/vda1             194M   32M  153M  17% /boot
+[root@localhost ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/vda3              57G  7.0G   48G  13% /
+tmpfs                 7.8G  272K  7.8G   1% /dev/shm
+/dev/vda1             194M   32M  153M  17% /boot
+[root@localhost ~]# ls
+anaconda-ks.cfg  [0m[01;34mDocuments[0m           login.dmp  password.txt          [01;34mTemplates[0m
+[01;34mben[0m              [01;34mDownloads[0m           [01;34mmama100[0m    [01;34mPictures[0m              [01;34mtest[0m
+[01;34mbin[0m              install.log         method.py  [01;34mPublic[0m                test.sh
+[01;34mDesktop[0m          install.log.syslog  [01;34mMusic[0m      run_sql_20150825.sql  [01;34mVideos[0m
+[m[root@localhost ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/vda3              57G  7.0G   48G  13% /
+tmpfs                 7.8G  272K  7.8G   1% /dev/shm
+/dev/vda1             194M   32M  153M  17% /boot
+[root@localhost ~]# logout
+Last login: Tue Dec  8 12:06:40 2015 from 10.100.11.19
+[root@localhost ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/vda3              57G  7.0G   48G  13% /
+tmpfs                 7.8G  272K  7.8G   1% /dev/shm
+/dev/vda1             194M   32M  153M  17% /boot
+[root@localhost ~]# top
+[H[J[mtop - 12:41:46 up 113 days,  2:21, 13 users,  load average: 0.02, 0.03, 0.02[m[K
+Tasks:[m[m 235 [mtotal,[m[m   1 [mrunning,[m[m 225 [msleeping,[m[m   9 [mstopped,[m[m   0 [mzombie[m[K
+Cpu(s):[m[m  1.0%[mus,[m[m  0.5%[msy,[m[m  0.0%[mni,[m[m 98.4%[mid,[m[m  0.0%[mwa,[m[m  0.0%[mhi,[m[m  0.0%[msi,[m[m  0.0%[mst[m[K
+Mem: [m[m  3753828k [mtotal,[m[m  2910436k [mused,[m[m   843392k [mfree,[m[m   295616k [mbuffers[m[K
+Swap:[m[m  2097144k [mtotal,[m[m    56204k [mused,[m[m  2040940k [mfree,[m[m  1605860k [mcached[m[K
+[6;1H
+[7m  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND            [m[K
+[m[m 2267 root      20   0 15172 1184  800 R  2.0  0.0   0:00.01 top                [m
+[m32228 root      20   0  367m  30m 4452 S  2.0  0.8   0:36.93 python             [m
+[m    1 root      20   0 19348  564  348 S  0.0  0.0   0:01.84 init               [m
+[m    2 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kthreadd           [m
+[m    3 root      RT   0     0    0    0 S  0.0  0.0   0:05.49 migration/0        [m
+[m    4 root      20   0     0    0    0 S  0.0  0.0   1135:15 ksoftirqd/0        [m
+[m    5 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0        [m
+[m    6 root      RT   0     0    0    0 S  0.0  0.0   0:22.10 watchdog/0         [m
+[m    7 root      RT   0     0    0    0 S  0.0  0.0   0:09.76 migration/1        [m
+[m    8 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/1        [m
+[m    9 root      20   0     0    0    0 S  0.0  0.0   5298:17 ksoftirqd/1        [m
+[m   10 root      RT   0     0    0    0 S  0.0  0.0   0:19.50 watchdog/1         [m
+[m   11 root      RT   0     0    0    0 S  0.0  0.0   0:06.81 migration/2        [m
+[m   12 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/2        [m
+[m   13 root      20   0     0    0    0 S  0.0  0.0   2155:35 ksoftirqd/2        [m
+[m   14 root      RT   0     0    0    0 S  0.0  0.0   0:18.10 watchdog/2         [m
+[m   15 root      RT   0     0    0    0 S  0.0  0.0   0:07.65 migration/3        [m[6;1H[K[H[mtop - 12:41:49 up 113 days,  2:21, 13 users,  load average: 0.02, 0.03, 0.02[m[K
+Tasks:[m[m 235 [mtotal,[m[m   2 [mrunning,[m[m 224 [msleeping,[m[m   9 [mstopped,[m[m   0 [mzombie[m[K
+Cpu(s):[m[m  0.8%[mus,[m[m  0.7%[msy,[m[m  0.0%[mni,[m[m 98.5%[mid,[m[m  0.0%[mwa,[m[m  0.0%[mhi,[m[m  0.0%[msi,[m[m  0.0%[mst[m[K
+Mem: [m[m  3753828k [mtotal,[m[m  2910444k [mused,[m[m   843384k [mfree,[m[m   295616k [mbuffers[m[K
+Swap:[m[m  2097144k [mtotal,[m[m    56204k [mused,[m[m  2040940k [mfree,[m[m  1605864k [mcached[m[K
+[6;1H
+[7m  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND            [m[K
+[m    9 root      20   0     0    0    0 S  7.6  0.0   5298:17 ksoftirqd/1        [m
+[m32227 root      20   0  434m  31m 4468 S  2.7  0.9   0:43.98 python             [m
+[m32226 root      20   0  367m  31m 4460 S  2.0  0.9   0:36.72 python             [m
+[m32228 root      20   0  367m  30m 4452 S  2.0  0.8   0:36.99 python             [m
+[m[m 2267 root      20   0 15144 1280  892 R  0.3  0.0   0:00.02 top                [m
+[m    1 root      20   0 19348  564  348 S  0.0  0.0   0:01.84 init               [m
+[m    2 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kthreadd           [m
+[m    3 root      RT   0     0    0    0 S  0.0  0.0   0:05.49 migration/0        [m
+[m    4 root      20   0     0    0    0 S  0.0  0.0   1135:15 ksoftirqd/0        [m
+[m    5 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0        [m
+[m    6 root      RT   0     0    0    0 S  0.0  0.0   0:22.10 watchdog/0         [m
+[m    7 root      RT   0     0    0    0 S  0.0  0.0   0:09.76 migration/1        [m
+[m    8 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/1        [m
+[m   10 root      RT   0     0    0    0 S  0.0  0.0   0:19.50 watchdog/1         [m
+[m   11 root      RT   0     0    0    0 S  0.0  0.0   0:06.81 migration/2        [m
+[m   12 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/2        [m
+[m   13 root      20   0     0    0    0 S  0.0  0.0   2155:35 ksoftirqd/2        [m[6;1H[K[25;1H
+[root@localhost ~]# ls
+anaconda-ks.cfg  [0m[01;34mDocuments[0m           login.dmp  password.txt          [01;34mTemplates[0m
+[01;34mben[0m              [01;34mDownloads[0m           [01;34mmama100[0m    [01;34mPictures[0m              [01;34mtest[0m
+[01;34mbin[0m              install.log         method.py  [01;34mPublic[0m                test.sh
+[01;34mDesktop[0m          install.log.syslog  [01;34mMusic[0m      run_sql_20150825.sql  [01;34mVideos[0m
+[m[root@localhost ~]# ^C
+[root@localhost ~]# logout

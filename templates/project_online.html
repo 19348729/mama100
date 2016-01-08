@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+	<head>
+		<meta charset="utf-8" />
+		<title>上线资源申请</title>
+
+		<link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/static/assets/css/font-awesome.min.css" />
+        <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="/static/assets/css/jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/chosen.css" />
+		<link rel="stylesheet" href="/static/assets/css/datepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/bootstrap-timepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/daterangepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/colorpicker.css" />
+        <link rel="stylesheet" href="/static/assets/css/bootstrap-duallistbox.css" />
+        <link rel="stylesheet" href="/static/assets/css/prettify.css" />
+
+		<link rel="stylesheet" href="/static/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/ace-skins.min.css" />
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script src="/static/js/jquery.bootstrap-duallistbox.js"></script>
+		<script src="/static/assets/js/ace-extra.min.js"></script>
+    <style>
+        .control-group{
+            padding:4px;
+            font-size:18px;
+        }
+
+        .checkbox-inline {
+            padding:10px;
+            font-size:15px;
+        }
+        .heading{
+            font-size:40px;
+            color:#2a6458
+            margin-top:120px;
+        }
+        .form-horizontal{
+            font-size:40px;
+            color:#2a6458
+            margin-top:1200px;
+        }
+
+    </style>
+<script>
+
+function show(index) {
+     if  (index == 'rpc') {
+//         alert(index)
+	document.getElementById("woding").style.display="";
+
+	}
+    else
+     {
+         document.getElementById("woding").style.display="none";
+
+     }
+
+}
+</script>
+    </head>
+
+<body>
+    <div class="table-header" style=" text-align:center"><h5 class="heading">上线资源申请</h5></div>
+
+<div>
+    </br>
+    </br>
+</div>
+    <form class="form-search form-horizontal"  method="post" action="project_online_commit">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="control-group">
+              <div class="col-md-4 control-label no-padding-right"  > 架构分类:&nbsp; &nbsp; &nbsp; </div>
+               <select name="jg_name" style="font-size:16px;">
+                    {%  for i in jg_name %}
+                            <option value={{ i }} >{{ i }}</option>
+                    {% endfor %}
+                </select><br>
+            </div>
+          <div class="control-group">
+          <div class="col-md-4 control-label no-padding-right" > 项目名: &nbsp; &nbsp; &nbsp; </div>
+                <input name="project_name" required="required" type="text"  value="" size="25" /><br>
+          </div>
+            <div class="control-group">
+            <div class="col-md-4 control-label no-padding-right"  > 上线时间: &nbsp; &nbsp; &nbsp; </div>
+                <input name="online_time" required="required" type="date"  value="" /><br>
+           </div>
+          <div class="control-group">
+         <div class="col-md-4 control-label no-padding-right" > 开发负责人:&nbsp; &nbsp; &nbsp; </div>
+
+            <input name="kaifa_man"  required="required" type="text"  value=""  /><br>
+              </div>
+          <div class="control-group">
+          <div class="col-md-4 control-label no-padding-right" > 软件名称关键字:&nbsp; &nbsp; &nbsp; </div>
+              <input name="soft_name" type="text" required="required"  value="" /><br>
+         </div>
+          <div class="control-group">
+          <div class="col-md-4 control-label no-padding-right"  > 软件类型: &nbsp; &nbsp; &nbsp;</div>
+               <select name="soft_type" style="font-size:16px;" onchange="show(this.value)">
+                    {%  for i in soft_type %}
+                        {%  if cmdb_project.soft_type == i %}
+                            <option value={{ i }}  selected = "selected">{{ i }}</option>
+                        {%  else %}
+                            <option value={{ i }} >{{ i }}</option>
+                        {%  endif %}
+                    {% endfor %}
+                </select><br>
+              </div>
+
+         <div class="control-group " id="woding">
+          <div class="col-md-4 control-label no-padding-right" > rpc端口数:&nbsp; &nbsp; &nbsp; </div>
+            <input name="duankou" type="text"  value=""  size=8/><br>
+         </div>
+
+         <div class="control-group">
+         <div class="col-md-4 control-label no-padding-right"  > 环境: &nbsp; &nbsp; &nbsp;</div>
+               <select name="ent_type" style="font-size:16px;">
+                    {%  for i in ent_type %}
+                        {%  if cmdb_project.ent_type == i %}
+                            <option value={{ i }}  selected = "selected">{{ i }}</option>
+                        {%  else %}
+                            <option value={{ i }} >{{ i }}</option>
+                        {%  endif %}
+                    {% endfor %}
+                </select><br>
+            </div>
+          <div class="control-group">
+           <div class="col-md-4 control-label no-padding-right" > svn路径:&nbsp; &nbsp; &nbsp; </div>
+            <input name="svn" type="text"  value="" size=70 /><br>
+            </div>
+         <div class="control-group">
+         <div class="col-md-4 control-label no-padding-right" > docker节点数:&nbsp; &nbsp; &nbsp; </div>
+            <input name="dock_node"  required="required" type="text"  value=""  size=8/><br>
+             </div>
+         <div class="control-group">
+         <div class="col-md-4 control-label no-padding-right "  >  内存:&nbsp; &nbsp; &nbsp;</div>
+            <input name="mem" type="text"  value="2G"  size=8 /><br>
+            </div>
+        </div>
+{#        <div class="col-md-7 control-label no-padding-right">#}
+{#        <label class="checkbox-inline ">#}
+{#                <input type="checkbox"  value="config" name="config">配置文件#}
+{#            </label>#}
+{#            <label class="checkbox-inline ">#}
+{#              <input type="checkbox"  value="jenkins_build" name="jenkins">jenkins构建#}
+{#            </label>#}
+{#            <label class="checkbox-inline ">#}
+{#                <input type="checkbox"  value="deploy_docker" name="deploy_docker">部署到docker#}
+{#            </label>#}
+{#        </div>#}
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="icon-ok bigger-110"></i>
+                    create
+                </button>
+
+                &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                <button class="btn btn-info" type="reset">
+                    <i class="icon-undo bigger-110"></i>
+                    Reset
+                </button>
+
+            </div>
+        </div>
+        </div>
+    </form>
+
+    </body>
+    </html>

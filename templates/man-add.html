@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Bootstrap表单组件 - Bootstrap后台管理系统模版Ace下载</title>
+		<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
+		<meta name="description" content="站长素材提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- basic styles -->
+
+		<link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/static/assets/css/font-awesome.min.css" />
+
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="/static/assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+		<!-- page specific plugin styles -->
+
+		<link rel="stylesheet" href="/static/assets/css/jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/chosen.css" />
+		<link rel="stylesheet" href="/static/assets/css/datepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/bootstrap-timepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/daterangepicker.css" />
+		<link rel="stylesheet" href="/static/assets/css/colorpicker.css" />
+
+		<!-- fonts -->
+
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
+		<!-- ace styles -->
+
+		<link rel="stylesheet" href="/static/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="/static/assets/css/ace-skins.min.css" />
+
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="/static/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+
+		<script src="/static/assets/js/ace-extra.min.js"></script>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="/static/assets/js/html5shiv.js"></script>
+		<script src="/static/assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		
+				
+
+			<div class="main-content">
+				<form class="form-search form-horizontal"  method="post" action="manualAdd">
+					<div class="page-content">
+						<div class="page-header">
+						    <h1>手工添加服务器相关信息<h1>
+						
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+
+								<form class="form-horizontal" role="form" action='wodiei' m>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 物理机ip地址: </label>
+
+										<div class="col-sm-9">
+											<input name="ip" type="text" id="form-field-1" value="{{ip}}" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 上架时间 </label>
+
+										<div class="col-sm-9">
+											<input name="onload_time" type="text" id="form-field-1" value="{{online_time}}" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 机柜编号 </label>
+
+										<div class="col-sm-9">
+											<select name="jigui_number">
+                                                <option value="">{{jigui_number}}</option>
+                                                <option value="A11">A11</option>
+                                                <option value="G2">G2</option>
+                                                <option value="G3">G3</option>
+                                                <option value="G9">G9</option>
+                                                <option value="G12">G11</option>
+                                                <option value="G12">G12</option>
+                                                <option value="G13">G13</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 空间大小 </label>
+
+										<div class="col-sm-9">
+											<select name="u_size">
+                                                <option value="空">{{u_size}}</option>
+                                                <option value="1U">1U</option>
+                                                <option value="2U">2U</option>
+                                                <option value="4U">4U</option>
+                                                <option value="6U">6U</option></select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-5"> 品牌 </label>
+
+										<div class="col-sm-9">
+                                            <select name="brand">
+                                                <option value="空">{{brand}}</option>
+                                                <option value="超微">超微</option>
+                                                <option value="BIM">IBM</option>
+                                                <option value="DELL">DELL</option>
+                                                <option value="交换机，防火墙设备">其他</option></select>
+										</div>
+									</div>
+                                    <div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-5"> 资产编号 </label>
+										<div class="col-sm-9">
+                                            <select name="brand">
+                                                <option value="空">{{other1}}</option>
+										</div>
+									</div>
+									
+
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="icon-ok bigger-110"></i>
+												Submit
+											</button>
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="icon-undo bigger-110"></i>
+												Reset
+											</button>
+										</div>
+									</div>
+
+									<div class="hr hr-24"></div>
+
+									
+
+								
+
+		
+				</form>
+							
+	<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>

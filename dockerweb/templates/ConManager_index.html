@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+
+		<link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/static/assets/css/ace.min.css" />
+		<script src="/static/assets/js/jquery-2.0.3.min.js"></script>
+		<script src="/static/js/jquery.cookie.js"></script>
+		<script src="/static/assets/js/jquery.dataTables.min.js"></script>
+		<script src="/static/assets/js/jquery.dataTables.bootstrap.js"></script>
+
+
+	<script>
+            function del_confirm() {
+                var res = confirm('确定要删除此条记录？');
+                if (res == true )
+                    return true;
+                else
+                    return false;
+            }		
+
+			// 将选中的IP 发送到 容器管理form
+			function send_select_ip(e) {
+				 var ip = $(e).val();
+
+				 $("#docker_server_ip").val(ip);
+			}
+	</script>
+</head>
+<body>
+	<div class="container-fluid">
+
+		<div>
+			<!-- 选择服务器IP -->
+			<form method="post" action="docker_con_index">
+				<div id="server_ip">
+					<span class="image_select text-info">请选择服务器IP:
+					<select class="ip_select" name="ip_select">
+						{% for ip in docker_ip %}
+                            {% if selected_docker_ip in ip %}
+						        <option value="{{ip}}" selected onclick="send_select_ip(this)">{{ip}}</option>
+                            {% else %}
+						        <option value="{{ip}}" onclick="send_select_ip(this)">{{ip}}</option>
+                            {%  endif %}
+						{% endfor %}
+					</select>
+					</span> &nbsp;&nbsp;
+					<span class="server_ip_ok"><input class="btn btn-primary" type="submit" value="确定" >
+				</div>
+			</form>
+		</div>
+
+		<div>
+			<div class="selected_docker_ip text-info">{{selected_docker_ip}}的容器如下:</div>
+			<form  action="constopstart" method="get">  
+				<input id="docker_server_ip" type="hidden" name="docker_server_ip" value="{{ selected_docker_ip }}" />
+
+			<br />
+
+			<table  id="sample-table-2" class="table table-bordered table-hover " >
+				<thead>
+				<tr>
+					<th>Status</th>
+					<th>Image</th>
+					<th>Ports</th>
+					<th>Command</th>
+					<th>Names</th>
+					<th>管理操作</th>
+				</tr>
+				</thead>
+						 <tr>
+
+			{% for i in cons %}
+					<td>{{i.Status}}</td>
+					<td>{{i.Image}}</td>
+					{% if i.Ports %}
+							<td>{% for j in i.Ports %}
+							{{j.PublicPort}}:{{j.PrivatePort}}
+							{% endfor %}
+							</td>
+					{% else %}
+							<td>
+                                {% for k,v in dockerport_info.items %}
+                                    {% if k == i.Names.0 %}
+                                        {{ v }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+					{% endif %}
+
+
+					<td>{{i.Command}}</td>
+					<td>{{i.Names.0}}</td>
+
+						<td>
+					{% if 'Up' in i.Status %}
+					<input class="btn btn-primary" name={{i.Id}} type="submit" id="stop" value="stop"/>
+					<input class="btn btn-primary" name={{i.Id}} type="submit" id="start" disabled='disabled' value="start"/>
+					<input class="btn btn-primary" name={{i.Id}} type="submit" id="del" value="del" onclick="return del_confirm()"/>          
+					{% else %}
+					<input class="btn btn-primary" name={{i.Id}} type="submit" id="stop" disabled='disabled' value="stop"/>
+					<input class="btn btn-primary" name={{i.Id}} type="submit" id="start"  value="start"/>
+					<input class="btn btn-primary" name={{i.Id}} type="submit" id="del" value="del"  onclick="return del_confirm()"/>          
+					{% endif %}
+						</td>
+					</tr>
+			{% endfor %}
+			</table>
+			</form>
+
+		</div>
+	</div>
+
+
+        {#表格数据处理#}
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sample-table-2').DataTable(
+                    {
+                    stateSave: true
+                    });
+        } );
+        </script>
+	</body>
+
+</html>
+</script>

@@ -1,0 +1,125 @@
+#!/usr/local/bin/python
+#*- coding: UTF-8 -*-
+from  multiprocessing import Process
+#from  mysql_run import *
+from mysql_run import *
+
+from password_mysql import *
+import paramiko
+import threading
+import os
+import ping
+import pexpect
+import exceptions
+import json
+from encrypt import *
+from  datetime  import  *
+import time
+
+
+get_process1='find /opt/applications/ /opt/webapp -type d|awk -F\'/\' \'{print $4}\'|sort -u|grep -v ^$|grep -v bak|grep -v bk'
+get_process2='ps -ef|grep -v grep'
+
+
+##遇到第一次连接的主机时去掉ssh的yes提示
+def del_yes(ip):
+	cmd="ssh root@"+ip
+	child = pexpect.spawn(cmd) 
+  	index = child.expect(['connecting','password',pexpect.EOF,pexpect.TIMEOUT],timeout=-1)  
+	if index == 0: 
+		child.sendline('yes\n') 
+
+###真正去ssh服务器执行脚本返回执行结果
+def run_ssh(ip,username,password,cmd):
+	try:
+		ssh=paramiko.SSHClient()
+		known_hosts='/root/.ssh/known_hosts'
+		ssh.load_system_host_keys(known_hosts)
+		ssh.connect(hostname=ip,username=username,password=password)
+		stdin,stdout,stderr=ssh.exec_command(cmd)
+		a=stdout.read().split('\n')
+		#for i in a.split('\n'):
+	#	for i in a:
+#			if i is "" or i is 'java':
+#				pass
+#			else:
+#				sql='insert into cmdb_project(ip,project) values (\''+ip+'\',\''+i+'\')'
+#				conn_mysql(sql)
+		return a
+	except:
+		return False
+
+####把字典中的KEY和VALUE调用run_shh函数执行，新得到一个字典
+def try_ssh(a,b,c):
+    try:
+        del_yes(a)
+        print "try-----"
+        dict_jieguo={}
+        applist=[]
+        dict_jieguo['process_type1']=run_ssh(a,b,c,get_process1)
+        dict_jieguo['process_type2']=run_ssh(a,b,c,get_process2)
+        for i in dict_jieguo['process_type1']:
+            #print "ok-----%s----"%i
+            #print "list----%s----"%str(dict_jieguo['process_type2'])
+            if i in str(dict_jieguo['process_type2']):
+                applist.append(i)
+                # print "###################%s########"%applist
+        for j in applist:
+            if j == '':
+                pass
+            else:
+                sql='insert into cmdb_project_auto(ip,project) values (\''+a+'\',\''+j+'\')'
+                print i
+                conn_mysql(sql)
+
+    except  paramiko.AuthenticationException:
+        print "%s:password error"%a
+	
+
+def jieguo(ip):
+	pingip=ping.quiet_ping(ip,count=1) ###快速静默PING，只发一个包
+	if pingip[0] == 0:
+		#password=decrypt_password(ip)
+		try:
+			password=decrypt(138,password_all[ip]) ###原来从数据库查询，现在改为从字典中查询
+			if password:
+				jieguo2=try_ssh(ip,'root',password)	
+		except  KeyError:
+			print "%s:没有密码"%ip
+		#else:
+		#	print "%s:no password"%ip
+	else:
+		pass
+def active():
+	for i in range(1,255):
+		ip='192.168.115.'+str(i)
+		p=threading.Thread(target=jieguo,args=(ip,)) 
+		p.start()
+		p.join()
+#	for i in range(2,250):
+#		ip='192.168.234.'+str(i)
+#		p=threading.Thread(target=jieguo,args=(ip,)) 
+#		p.start()
+#		p.join()
+
+
+###从数据库取出所有的密码和IP对应关系，返回一个字典
+def get_all_password():
+	temp_password={}
+	sql='select ip,password from hostpasswd'
+	temp_result=conn_mysql(sql)
+	for i in temp_result:
+		temp_password[i[0]]=i[1]
+	return temp_password
+
+##### 给我IP，我给你密码
+def get_password(ip):
+    password_all={}
+    password_all=get_all_password()
+    single_password=decrypt(138,password_all[ip])
+    return single_password
+#####一次性把密码取到字典中
+if __name__=="__main__":
+    password_all={}
+    password_all=get_all_password()
+    active()

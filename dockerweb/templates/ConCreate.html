@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/static/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/static/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/static/Css/style.css" />
+    <script type="text/javascript" src="/static/Js/jquery.js"></script>
+    <script type="text/javascript" src="/static/Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/static/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="/static/Js/ckform.js"></script>
+    <script type="text/javascript" src="/static/Js/common.js"></script>
+
+ 
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+		/* form  input radio按钮居中*/
+		input[type="radio"] {
+			margin-top:-2px;
+		}
+
+		input[type="checkbox"] {
+			margin-top:-2px;
+		}
+
+
+		/* label 标签字体大小 */
+		.label_text {
+			font-size:16px;
+		}
+
+		.step {
+			margin:5px;
+			font-weight: bold;
+			font-size:18px;
+			color:#DA1C5A;
+		}
+		.step_info {
+			margin-bottom:8px;
+			font-size:16px;
+		}
+
+		.step_info  span{
+			display:inline-block;
+			padding-right:10px;
+			width:120px;
+			text-align:right;
+		}
+	
+		.step_info .prompt_info {
+			display:inline-block;
+			text-align:left;
+			color:red;
+		}
+
+		/*  提交、重置按钮盒子  */
+		.submit {
+			margin-left:50px;
+			margin-bottom:80px;
+		}
+
+
+    </style>
+	<script>
+	/*
+		function select_click(e) {
+			alert( e.value );
+			$(function(){
+				alert(555);
+			});
+		}
+	*/
+
+
+
+	$(function(){
+
+		// 禁用或可用网络模式
+		$(".bridge_mode").click(function(){
+			$(".phy_port").removeAttr("disabled");
+			$(".con_port").removeAttr("disabled");
+		});
+
+		$(".host_mode").click(function(){
+			$(".phy_port").attr("disabled", "true");
+			$(".con_port").attr("disabled", "true"); 
+		});
+
+		// 显示或隐藏高级配置
+		$(".show_adv_config").click(function(){
+			if ( $(this).is(':checked') ) {
+				$(".adv_config").removeClass('hide');
+				$(".adv_config").addClass('show');
+
+				$(".hide_adv_config").attr('checked', false);
+			} else {
+				$(".adv_config").removeClass('show');
+				$(".adv_config").addClass('hide');
+
+				$(".show_adv_config").attr('checked', false);
+			}
+		});
+
+		//服务器、镜像联动
+
+		var image = new Object();
+
+		{% for ip, images in docker_ip_image.items %}
+			// 生成二维数组，用IP做第一维
+			image["{{ip}}"] = new Array();
+			var i=0;
+			var server_ip = "{{ ip }}";
+			{% for image in images %}
+				//docker服务器IP 与 镜像关联
+				image[server_ip][i++] = "{{image.RepoTags.0}}";
+			{% endfor %}
+		{% endfor %}
+
+		$('.ip_select').click(function(){
+			var server_ip = $(this).val();
+			$('.image_select').empty();  //清空镜像
+			for (i=0; i<image[server_ip].length; i++) {
+				var option_str = "<option value='" + image[server_ip][i] + "'>"  + image[server_ip][i] + "</option>";
+				//$('.image_select').options[i] = new Option();
+				$('.image_select').append(option_str);
+			}
+		});
+
+		
+	});
+
+	function form_confirm() {
+		if ( $(".con_commd").val() == '' ) {
+			alert("执行命令不能为空");
+			return false;
+		}
+
+		if ( $(".con_name").val() == '' ) {
+			alert("容器别名不能为空");
+			return false;
+		}
+
+		if ( $(".bridge_mode").is(":checked") ) {
+			if ( $(".phy_port").val() == '' ) {
+				alert("物理机端口不能为空");
+				return false;
+			}
+
+			if ( $(".con_port").val() == '' ) {
+				alert("容器端口不能为空");
+				return false;
+			}			
+		}
+
+		if ( $(".phy_dir").val() == '' ) {
+			alert("物理机目录不能为空");
+			return false;
+		}
+
+		if ( $(".con_dir").val() == '' ) {
+			alert("容器目录不能为空");
+			return false;
+		}
+		
+		return true;
+	}
+	</script>
+</head>
+<body>
+
+
+<div class="container-uid">
+	<form class="form-inline definewidth m20" action="Conadd" method="get" onsubmit="return form_confirm()">
+	
+	<div class="step">第一步:选择服务器</div>
+	<div class="step_info text-info">
+		<span>请选择服务器</span>
+		<select class="ip_select" name="">
+		{% for ip, images in docker_ip_image.items %}
+			<option value="{{ip}}">{{ip}}</option>
+		{% endfor %}
+		</select>
+	</div>
+	<br />
+
+	<div class="step">第二步:选择镜像名</div>
+
+	<div class="step_info text-info">
+		<span>请选择镜像</span>
+		<select class="image_select" name="sel">
+		{% for ip, images in docker_ip_image.items %}
+			<!-- 取第一个服务器的镜像 -->
+			{% if forloop.first %}
+				{% for image in images %}			
+					<option value="{{image.RepoTags.0}}" style="height:22px; font-size:16px;">{{image.RepoTags.0}}</option>
+				{% endfor %}
+			{% endif %}
+		{% endfor %}
+		</select>
+	</div>
+	</br>
+
+	<div class="step">第三步:执行命令</div>
+	<div class="step_info text-info"><span>执行命令</span><input class="con_commd" name="con_commd" type="text" /><span class="prompt_info">&nbsp;*</span></div>
+	<br />
+
+	<div class="step">第四步:容器别名</div>
+	<div class="step_info text-info"><span>容器别名</span><input class="con_name" name="con_name" type="text" /><span class="prompt_info">&nbsp;*</span></div>
+	<br />
+
+	<div class="step">第五步:网络模式</div>
+	<div class="step_info text-info">
+		<span>请选择网络模式</span>
+		<label class="label_text"><input class="bridge_mode" name="net_mode" type="radio" checked/> 桥接模式</label>&nbsp;&nbsp;&nbsp;
+		<label class="label_text"><input class="host_mode" name="net_mode" type="radio" /> 主机模式</label>&nbsp;&nbsp;
+	</div>
+	<div class="step_info text-info"><span>物理机端口</span><input class="phy_port" name="phy_port" title='ex:28080,24848' type="text" /><span class="prompt_info">&nbsp;*</span></div>
+	<div class="step_info text-info"><span>容器端口</span><input class="con_port" name="con_port" title='ex:8080,4848' type="text" /><span class="prompt_info">&nbsp;*</span></div>
+	<br />
+
+	<div class="step">第六步:选择目录挂载</div>
+	<div class="step_info text-info"><span>物理机目录</span><input class="phy_dir" name="phy_dir" title='ex:/tmp,/opt' type="text" /><span class="prompt_info">&nbsp;*</span></div>
+	<div class="step_info text-info"><span>容器目录</span><input class="con_dir" name="con_dir" title='ex:/tmp2,/opt2'  type="text" /><span class="prompt_info">&nbsp;*</span></div>
+
+	</br>
+	<div class="step">
+		<label><input class="show_adv_config" type="checkbox" />&nbsp;显示/隐藏高级配置(可选)</label> 
+	</div>
+
+
+
+
+	<div class="adv_config hide">
+	</br>
+	<!--div class="step">CPU核数</div-->
+	<div class="step_info text-info"><span>CPU核数</span><input name="cpu_name" type="text" /></div>
+
+
+	</br>
+	<!--div class="step">内存容量</div-->
+	<div class="step_info text-info"><span>内存容量</span><input name="mem_name" type="text" /></div>
+	</div>
+
+	</br>
+	<div class="submit">
+		<input class="btn btn-primary" type="submit" value="提交" /> &nbsp;&nbsp;
+		<input class="btn btn-primary" type="reset" value="重置" />
+	</div>
+	</form>
+</div>
+</body>
+</html>
