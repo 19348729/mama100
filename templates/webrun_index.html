@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>webrun</title>
+        <script src="/static/assets/js/jquery-2.0.3.min.js"></script>
+
+      <script>
+        var check=''
+
+        function wsconnect(order) {
+            var rum_comm=$('#rum_comm').val()
+
+            var ws = new WebSocket("ws://192.168.234.139:6767/webrun/"+rum_comm);
+                check=order
+                ws.onopen = function () {
+                    console.log("open");
+                    ws.send(order);
+                };
+                ws.onmessage = function (evt) {
+                    element = document.getElementById("log");
+{#                    element.value += (evt.data + "\n");#}
+                    element.value += (evt.data );
+                    element.scrollTop = element.scrollHeight;
+
+                };
+                ws.onclose = function (evt) {
+                    console.log("WebSocketClosed!");
+                };
+                ws.onerror = function (evt) {
+                    console.log("WebSocketError!");
+                };
+
+        }
+      </script>
+
+  </head>
+  <body>
+
+  文件名: <input id="rum_comm" value="">
+<button id="run" value="run" onclick="wsconnect(this.value)">运行</button>
+
+  <textarea name="log" id="log" style="font-size:12px; width:100%; height: 600px;"> log file::</textarea>
+  </body>
+</html>

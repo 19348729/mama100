@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- TemplateBeginEditable name="doctitle" -->
+        <title>变更或上线操作申请</title>
+        <link rel="stylesheet" type="text/css" href="/static/assets/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="/static/assets/css/bootstrap-responsive.css" />
+        <link rel="stylesheet" type="text/css" href="/static/assets/css/style.css" />
+        <script type="text/javascript" src="/static/js/jquery.js"></script>
+
+
+        <style>
+            .query_result {
+                margin: 50px 0px 30px 78px;
+            }
+
+            /* radio 垂直居中  */
+            .radio_info {
+                display: inline-block;
+                padding-top: 4px;
+                height:28px;
+                font-size:25px;
+                line-height: 25px;
+            }
+            .heading{
+            font-size:40px;
+            color:#2a6458
+            margin-top:120px;
+             }
+            /*  sql 语句文本框 */
+            .sql_cmd {
+                width: 800px;
+                height: 300px;
+                resize: none;
+            }
+            .control-group{
+                padding:4px;
+                font-size:18px;
+            }
+
+                        /* */
+                        #span_radio_text {
+                                color:black;
+                                font-size:14px;
+                        }
+
+        </style>
+    </head>
+
+ <body>
+<div class="table-header" style=" text-align:center"><h5 class="heading">需求流程申请</h5></div>
+      <div class="control-group ">
+
+        <div name="query_result" class="query_result">
+            <a class="btn btn-primary" href="/records">操作查询</a> &nbsp;&nbsp;
+        </div>
+
+        <div class="text-info">
+            <form class="form-horizontal" method="post" action="/recordcommit" enctype="multipart/form-data">
+            <label class="control-label">申请类型：</label>
+                    <div class="margin: 0 auto; padding:500px">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="radio_info"><input type="radio"  name="apply_type" value="sql_env" class="radio_value" checked onchange="show_con(this)"></div>  <span id="span_radio_text">数据库处理</span> &nbsp;&nbsp;
+                        <div class="radio_info"><input type="radio"  name="apply_type" value="app_env" class="radio_value" onchange="show_con(this)"></div>    <span id="span_radio_text">应用上线变更</span> &nbsp;&nbsp;
+                        <div class="radio_info"><input type="radio"  name="apply_type" value="fault_env" class="radio_value"  onchange="show_con(this)"></div>    <span id="span_radio_text">故障处理</span>
+                    </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="sql_user">申请人：</label>
+                    <div class="controls">
+                        <input type="text" id="sql_user" name="auth" placeholder="请输入你的中文姓名即可" required>
+                    </div>
+                </div>
+
+
+
+                <div class="control-group">
+                    <label class="control-label" for="sql_cmd">变更内容：</label>
+                    <div class="controls">
+                        <textarea id="sql_cmd"   class="sql_cmd"  name="record_con"  placeholder="注意：可以为SQL语句或者为具体的上线或变更需求"></textarea>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="sql_file">提交文件：</label>
+                    <div class="controls">
+                        <input id="sql_file" multiple=true   name="file"  size="20" type="file" onchange="change()"/><span style="color:red;">注意:请将文件保存为utf-8再上传</span>
+                    </div>
+                </div>
+            <div id="file_name">
+                文件列表：
+            </div>
+
+                <div id='show_all' class="control-group">
+                    <label class="control-label">执行环境：</label>
+                    <div id="sql_env" class="radio_value">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="radio_info"><input type="radio"  name="run_env" value="生产oracle" class="radio_value" ></div>  <span id="span_radio_text" >生产oracle</span> &nbsp;&nbsp;
+                        <div class="radio_info"><input type="radio"  name="run_env" value="测试oracle" class="radio_value" ></div>    <span id="span_radio_text">测试oracle</span> &nbsp;&nbsp;
+                        <div class="radio_info"><input type="radio"  name="run_env" value="生产mysql" class="radio_value" ></div>    <span id="span_radio_text">生产mysql</span> &nbsp;&nbsp;
+                        <div class="radio_info"><input type="radio"  name="run_env" value="测试mysql" class="radio_value" ></div>    <span id="span_radio_text">测试mysql</span>
+                    </div>
+                    <div id="app_env" class="radio_value hidden" >
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                           <div class="radio_info"><input type="radio"  name="run_env" value="生产" class="radio_value" ></div>  <span id="span_radio_text" >生产</span> &nbsp;&nbsp;
+                        <div class="radio_info"><input type="radio"  name="run_env" value="测试" class="radio_value"  ></div>    <span id="span_radio_text">测试</span> &nbsp;&nbsp;
+
+                    </div>
+                    <div id="fault_env" class="radio_value hidden ">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                           <div class="radio_info"><input type="radio"  name="run_env" value="一般" class="radio_value" ></div>  <span id="span_radio_text" >一般</span> &nbsp;&nbsp;
+                            <div class="radio_info"><input type="radio"  name="run_env" value="严重" class="radio_value"  ></div>    <span id="span_radio_text">严重</span> &nbsp;&nbsp;
+                            <div class="radio_info"><input type="radio"  name="run_env" value="比较严重" class="radio_value" ></div>  <span id="span_radio_text" >比较严重</span> &nbsp;&nbsp;
+                            <div class="radio_info"><input type="radio"  name="run_env" value="特大" class="radio_value" ></div>    <span id="span_radio_text">特大</span> &nbsp;&nbsp;
+
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="project">变更或上线所属项目名：</label>
+                    <div class="controls">
+                        <select id="project" name="project_name">
+                            <option value="">请选择项目...</option>
+                            {% for j in xiangmu %}
+                            <option value={{j}}>{{j}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="exec_desc">请求运维操作说明：</label>
+                    <div class="controls">
+                        <input id="exec_desc"   name="run_con" type="text" style="width:500px" required />
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <input id="submit"   name="ok"      type="submit" class="btn btn-primary"  value="提交" /> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input id="cancel"   name="cancel" type="reset" class="btn btn-primary"   value="重置" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+<script>
+{#    function show_sql(){#}
+{#        $("#sql_env").removeClass('hide')#}
+{#        $("#app_env").addClass('hide')#}
+{#    }#}
+{#    function show_other(){#}
+{#        $("#sql_env").addClass('hide')#}
+{#        $("#app_env").removeClass('hide')#}
+{#        $("#app_env").addClass('show')#}
+{#    }#}
+{#    function show_guzhang(){#}
+{#        $("#sql_env").addClass('hide')#}
+{#        $("#app_env").removeClass('hide')#}
+{#        $("#app_env").addClass('show')#}
+{#    }#}
+{##}
+{##}
+{#      <script>#}
+    function show_con(thisvalue){
+        $('#show_all > div').addClass('hidden')
+        $('#show_all > div').removeClass('show')
+{#        alert($(thisvalue).val())#}
+        var show_num=$(thisvalue).val()
+{#        alert(#show_num)#}
+        $("#"+show_num).addClass('show')
+        $("#"+show_num).removeClass('hidden')
+    }
+</script>
+{# ####处理上传多个文件时，显示文件名#}
+ <script>
+function change() {
+var obj = document.getElementById("sql_file");
+var file_name = document.getElementById("file_name");
+var length = obj.files.length;
+for (var i = 0; i < obj.files.length; i++) {
+var temp = obj.files[i].name;
+file_name.innerHTML+=temp+'\n'
+{#        alert(temp);#}
+}
+}
+</script>
+
+  </body>
+</html>

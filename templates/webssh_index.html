@@ -18,34 +18,36 @@
 
 
       <script>
+        var check=''
 
+        function wsconnect(order) {
+            var file_names=$('#file_name').val()
+{#            alert(file_name)#}
+            if (check==order){
+                alert('已经'+order)
+            }
+            else{
+                var ws = new WebSocket("ws://192.168.234.139:6767/wssh/"+file_names);
+                check=order
+                ws.onopen = function () {
+                    console.log("open");
+                    ws.send(order);
+                };
+                ws.onmessage = function (evt) {
+                    element = document.getElementById("log");
+{#                    element.value += (evt.data + "\n");#}
+                    element.value += (evt.data );
+                    element.scrollTop = element.scrollHeight;
 
-          var ws = new WebSocket("ws://192.168.234.139:5050/wssh");
-
-            ws.onopen = function()
-            {
-              console.log("open");
-              ws.send("sdf");
-
-            };
-            ws.onmessage = function(evt)
-            {
-                alert(evt.data)
-                $(function() {
-                    alert($('#nb').val(evt.data))
-                })
-              console.log(evt.data)
-                 ws.send("hello");
-            };
-            ws.onclose = function(evt)
-            {
-              console.log("WebSocketClosed!");
-            };
-            ws.onerror = function(evt)
-            {
-              console.log("WebSocketError!");
-            };
-
+                };
+                ws.onclose = function (evt) {
+                    console.log("WebSocketClosed!");
+                };
+                ws.onerror = function (evt) {
+                    console.log("WebSocketError!");
+                };
+            }
+        }
       </script>
 
 
@@ -56,6 +58,11 @@
 {#    <div id="gateone_container" style="position: relative; width: 60em; height: 30em;">#}
 {#        <div id="gateone"></div>#}
 {#    </div>#}
-  hao: <input id="nb" value="adf">
+
+  文件名: <input id="file_name" value="">
+<button id="start" value="start" onclick="wsconnect(this.value)">启动</button>
+<button id="stop" value="stop" onclick="wsconnect(this.value)">停止</button>
+
+  <textarea name="log" id="log" style="font-size:12px; width:100%; height: 600px;"> log file::</textarea>
   </body>
 </html>

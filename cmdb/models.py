@@ -37,7 +37,7 @@ class cmdb_manual_info(models.Model):
     def __unicode__(self):
         return ip
 
-
+######进程信息表，暂无数据
 class cmdb_process_info (models.Model):
     ip=models.CharField(max_length=100)
     nodes=models.CharField(max_length=50)
@@ -53,6 +53,8 @@ class cmdb_process_info (models.Model):
     def __unicode__(self):
         return ip
 
+
+#######操作信息表，暂无使用
 class cmdb_operation_info (models.Model):
     ip=models.CharField(max_length=100)
     recode_info=models.CharField(max_length=50)#操作记录
@@ -66,6 +68,8 @@ class cmdb_operation_info (models.Model):
     def __unicode__(self):
         return ip
 
+
+#####机柜信息表
 class cmdb_jigui_info(models.Model):
     number=models.CharField(max_length=50)
     dianya=models.CharField(max_length=50)
@@ -78,7 +82,7 @@ class cmdb_jigui_info(models.Model):
     def __unicode__(self):
         return number
 
-
+####对外连接表，暂时没有使用
 class cmdb_connect_info(models.Model):
     brand=models.CharField(max_length=50)
     connect_name=models.CharField(max_length=50)
@@ -155,12 +159,16 @@ class cmdb_project_base(models.Model):
 
 #####操作记录表
 class cmdb_operation_records(models.Model):
-        type=models.CharField(max_length=100)
-        records=models.CharField(max_length=1000)
-        project=models.CharField(max_length=200,null=True)
-        operation_name=models.CharField(max_length=200,null=True)
-        time=models.CharField(max_length=200,null=True)
-        type_level=models.CharField(max_length=100)
+        apply_type=models.CharField(max_length=100)####类型
+        auth=models.CharField(max_length=100)###录入人
+        record_con=models.CharField(max_length=200,null=True)####报告内容
+        run_env=models.CharField(max_length=200,null=True)###运行环境
+        project_name=models.CharField(max_length=200,null=True)####项目名
+        run_con=models.CharField(max_length=500,null=True)###执行说明
+        file_path=models.CharField(max_length=500,null=True)###上传文件路径
+        run_ok=models.CharField(max_length=100)####是否执行
+        run_time=models.DateTimeField(null=True)####执行时间
+        insert_time=models.DateTimeField(null=True)####记录提交时间
         other1=models.CharField(max_length=500,null=True)
         other2=models.CharField(max_length=200,null=True)
         class Meta:

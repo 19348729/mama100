@@ -42,14 +42,7 @@
 {#                <h1 align="center" ><font color="#00008b" > 配置文件编辑</font></h1>#}
     <br>
     <div align="center">
-{#              <label class="col-sm-3 control-label no-padding-right"  > 文件列表: </label>#}
-              <h3><font color="#1e90ff"> 请选择:</font></h3><select name="file_name" onchange="get_context(this)">
-                    <option></option>
-                    {%  for i in find_dir_list %}
-                        <option value={{ i }} >{{ i }}</option>
-                    {% endfor %}
-                </select>
-{#        </div>#}
+        文件名:<input id="file_name" name="file_name" value={{ file_name }} size=70>
         <br>
         <br>
 
@@ -65,14 +58,14 @@
 
 </form>
 <script>
-     function get_context(btnthis) {
+{#    alert($('#file_name').val())#}
          $.get('get_file_info',{
-             file_name:$(btnthis).val()
+             file_name:$('#file_name').val()
          },function(response){
                      $('#textarea').val(response);
                  }
      )
-     };
+
 </script>
 </body>
 </html>

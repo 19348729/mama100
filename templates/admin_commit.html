@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>sql-recode</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+        <link rel="stylesheet" type="text/css" href="/static/assets/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="/static/assets/css/bootstrap-responsive.css" />
+        <link rel="stylesheet" type="text/css" href="/static/assets/css/style.css" />
+        <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/static/js/ckform.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
+</head>
+<style>
+    /*
+t_area{ 
+width:300px; 
+overflow-y:auto 
+}
+*/
+
+
+    /* 左侧span 样式*/
+    .span_sql_left {
+        display: inline-block;
+        width:150px;
+        padding-right:8px;
+        text-align: right;
+
+    }
+    .heading{
+            font-size:40px;
+            color:#2a6458
+            margin-top:120px;
+        }
+    /* 每条记录div的样式 */
+    .frame_info {
+        margin: 50px 0 20px 0;
+        padding: 20px 0 ;
+
+        font-size: 16px;
+        background: #f5f5f5;
+        border-top: 1px solid #9c9957;
+        border-bottom: 1px solid #9c9957;
+    }
+    .frame_info div {
+        margin:5px 0;
+    }
+</style>
+
+<script>
+                function del_confirm() {
+                        var res = confirm('确定要删除此条记录？');
+                        if (res == true )
+                                return true;
+                        else
+                                return false;
+                }   
+
+</script>
+
+<body>
+    <div class="table-header" style=" text-align:center"><h5 class="heading">运维记录查询</h5></div>
+    <div >
+        <form class="form-horizontal" action="sqlrun" method="get">
+            {% for i in a %}
+            <div class="frame_info ">
+               <div>
+                   <span class="span_sql_left text-info">操作类型：</span>  <span >{{i.apply_type}}</span>
+               </div>
+
+                <div>
+                    <span class="span_sql_left text-info">提交人：</span>  <span>{{i.auth}}</span> <br/>
+                </div>
+
+                <div>
+                    <span class="span_sql_left text-info">执行环境：</span>  <span style="color:red;">{{i.run_env}}</span> <br/>
+                </div>
+
+                <div>
+                    <span class="span_sql_left text-info">提交时间：</span>  <span>{{i.insert_time}}</span> <br/>
+                </div>
+
+                <div>
+                    <span class="span_sql_left text-info">执行说明：</span> <span>{{i.run_con}}</span>
+                </div>
+
+                <div>
+                    <span class="span_sql_left text-info">具体操作：</span>
+                    <span >
+
+                             <textarea id="{{ forloop.counter }}" style="width:700px; height:300px; resize:none; overflow:scroll;overflow-y:hidden;;overflow-x:hidden" >{{i.record_con}}</textarea>
+                            <br />
+                            <span class="span_sql_left"></span> <span style="display:inline-block; margin-top:5px;"><input class="btn btn-primary" type="button" id="copy_code" onClick="copyUrl2('{{forloop.counter}}')" value="点击复制代码" /></span>
+
+                    </span>
+                </div>
+                <div>
+                    <span class="span_sql_left text-info">文件路径：</span>
+                      {% for k,file in file_dict.items %}
+{#                    {% for j in i.file_path %}#}
+{#                        kkk{{ j }}#}
+{#                        {% endfor %}#}
+                    <!--<a href={{i.sql_cont}}>{{i.file_path}}</a>-->
+                          {% if i.id == k %}
+                                {% for f in file %}
+                                <a href={{ f }}>{{ f }}</a>
+                                {% endfor %}
+                          {% endif %}
+
+                      {% endfor %}
+                </div>
+                <div>
+                    <span class="span_sql_left text-info"></span>
+                                        <input class="btn btn-primary" name="{{i.id}}" type="submit" value="已执行" />
+                                        <a class="btn btn-success" href="/sql_del?id={{i.id}}"  onclick="return del_confirm()">删除</a>
+                </div>
+            </div>
+            <hr />
+            {% endfor %}
+        </form>
+    </div>
+<!--
+<br />
+
+<form action="sqlrun" method="get"> 
+{% for i in a %}
+        <li type="hidden" name="id" value={{i.id}}>{{i.id}}</li>
+        sql作者:{{i.auth}}
+        <br>
+        执行环境:<font color="#FF0000"> {{i.run_env}}</font><br>
+        语句提交时间:{{i.insert_time}}  <br>   
+        sql内容:<br>
+        {% if 'http' in i.sql_cont %}
+        <a href={{i.sql_cont}}>{{i.sql_cont}}</a>
+        {% else %}
+<textarea rows=10 cols=200 id={{forloop.counter}} style='overflow:scroll;overflow-y:hidden;;overflow-x:hidden'>{{i.sql_cont}}</textarea>
+        <input type="button" onClick="copyUrl2('{{forloop.counter}}')" value="点击复制代码" /> <br>
+        {% endif %}
+        <br>
+        执行说明:{{i.other}}<br>
+        <input name="{{i.id}}" type="submit" value="已执行" />
+{% endfor %}
+-->
+</body>
+<script type="text/javascript">
+                function copyUrl2(haha) {
+
+                        var Url2 = document.getElementById(haha);
+                        Url2.select(); // 选择对象
+                        document.execCommand("Copy"); // 执行浏览器复制命令 
+                        alert("已复制好，可贴粘。");
+                }
+</script>
+</html>

@@ -7,8 +7,12 @@ from mama100.cmdb.webssh import *
 from mama100.cmdb.passwd import *
 from mama100.cmdb.project import *
 from mama100.cmdb.configremanager import *
+from mama100.cmdb.upload_file import *
 from mama100.cmdb.records import *
 from mama100.dockerweb.views import *
+# from mama100.cmdb.webrun import *
+
+
 urlpatterns = patterns('',
     # Exampleswerer:
     # url(r'^$', 'mama100.views.home', name='home'),
@@ -44,8 +48,11 @@ urlpatterns = patterns('',
 
 #####weebssh
     url(r'^webssh_index$',webssh_index),
-    # url(r'^wssh/(?P<hostname>\d+\.\d+\.\d+\.\d+)/(?P<username>.*)$',webssh_connect),
-    url(r'^wssh$',webssh_connect),
+    url(r'^webrun_index$',webrun_index),
+    url(r'^wssh/(?P<filename>.*)$',webssh_connect),
+    url(r'^webrun/(?P<run_commd>.*)$',webrun),
+    # url(r'^wssh/(?P<filename>\d+\.\d+\.\d+\.\d+)/(?P<username>.*)$',webssh_connect),
+    # url(r'^wssh$',webssh_connect),
 ######project
     url(r'^project_info$',project_info),
     url(r'^project_edit/$',project_edit),
@@ -54,11 +61,16 @@ urlpatterns = patterns('',
     url(r'^project_create_commit$',project_create_commit),
     url(r'^project_delete$',project_delete),
     url(r'^project_online_build_job$',project_online_build_job),
+    url(r'^goujian$',goujian),
 ######configure manager
     url(r'^networkdy_index$',networkdy_index),
     url(r'^config_edit$',config_edit),
+    url(r'^config_delte',config_delte),
     url(r'^get_file_info$',get_file_info),
     url(r'^config_info_commit$',config_info_commit),
+    url(r'^config_info_index$',config_info_index),
+    url(r'^upload_file_index$',upload_file_index),
+    url(r'^upload_file_commit',upload_file_commit),
 ######configure project cmdb
     url(r'^project_online$',project_online),
     url(r'^project_online_commit$',project_online_commit),
@@ -73,6 +85,12 @@ urlpatterns = patterns('',
     url(r'^docker_maxport',docker_maxport),
  ########records ##############
     url(r'^records$',records),
+    url(r'^records_input',records_input),
+    url(r'^recordcommit$',recordcommit),
+    url(r'^admin_commit$',admin_commit),
+    url(r'^sqlrun$',sqlrun),
+    url(r'^sql_del$',sql_del),
+
  ########test ##############
     url(r'^form',form),
 )

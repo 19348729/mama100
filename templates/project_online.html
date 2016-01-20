@@ -60,7 +60,15 @@ function show(index) {
      }
 
 }
+function to_lujing()
+    {
+    var x=document.getElementById("soft_name").value
+    var y=document.getElementById("ent_type").value
+    document.getElementById("source_lujing").value='/var/lib/jenkins/deploy/patch/'+x+'/'+y
+    document.getElementById("target_lujing").value='/opt/applications/'+x+'/'+y
+    }
 </script>
+
     </head>
 
 <body>
@@ -85,7 +93,7 @@ function show(index) {
             </div>
           <div class="control-group">
           <div class="col-md-4 control-label no-padding-right" > 项目名: &nbsp; &nbsp; &nbsp; </div>
-                <input name="project_name" required="required" type="text"  value="" size="25" /><br>
+                <input name="project_name" id="project_name" required="required" type="text" size="25" /><br>
           </div>
             <div class="control-group">
             <div class="col-md-4 control-label no-padding-right"  > 上线时间: &nbsp; &nbsp; &nbsp; </div>
@@ -96,10 +104,7 @@ function show(index) {
 
             <input name="kaifa_man"  required="required" type="text"  value=""  /><br>
               </div>
-          <div class="control-group">
-          <div class="col-md-4 control-label no-padding-right" > 软件名称关键字:&nbsp; &nbsp; &nbsp; </div>
-              <input name="soft_name" type="text" required="required"  value="" /><br>
-         </div>
+
           <div class="control-group">
           <div class="col-md-4 control-label no-padding-right"  > 软件类型: &nbsp; &nbsp; &nbsp;</div>
                <select name="soft_type" style="font-size:16px;" onchange="show(this.value)">
@@ -113,14 +118,14 @@ function show(index) {
                 </select><br>
               </div>
 
-         <div class="control-group " id="woding">
+         <div class="control-group" id="woding">
           <div class="col-md-4 control-label no-padding-right" > rpc端口数:&nbsp; &nbsp; &nbsp; </div>
             <input name="duankou" type="text"  value=""  size=8/><br>
          </div>
 
          <div class="control-group">
          <div class="col-md-4 control-label no-padding-right"  > 环境: &nbsp; &nbsp; &nbsp;</div>
-               <select name="ent_type" style="font-size:16px;">
+               <select name="ent_type" id="ent_type" style="font-size:16px;">
                     {%  for i in ent_type %}
                         {%  if cmdb_project.ent_type == i %}
                             <option value={{ i }}  selected = "selected">{{ i }}</option>
@@ -130,6 +135,10 @@ function show(index) {
                     {% endfor %}
                 </select><br>
             </div>
+          <div class="control-group">
+          <div class="col-md-4 control-label no-padding-right" > 应用名称:&nbsp; &nbsp; &nbsp; </div>
+              <input name="soft_name" id="soft_name" type="text" required="required"  value=""  onblur="to_lujing()"/><br>
+         </div>
           <div class="control-group">
            <div class="col-md-4 control-label no-padding-right" > svn路径:&nbsp; &nbsp; &nbsp; </div>
             <input name="svn" type="text"  value="" size=70 /><br>
@@ -141,6 +150,16 @@ function show(index) {
          <div class="control-group">
          <div class="col-md-4 control-label no-padding-right "  >  内存:&nbsp; &nbsp; &nbsp;</div>
             <input name="mem" type="text"  value="2G"  size=8 /><br>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="col-md-4 control-label no-padding-right "  >  配置文件源路径:&nbsp; &nbsp;&nbsp;</div>
+                <input name="source_lujing" id="source_lujing" type="text" size=50 /><br>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="col-md-5 control-label no-padding-right "  >  配置文件目标路径:&nbsp; &nbsp;&nbsp;</div>
+                <input name="target_lujing" id="target_lujing" type="text" size=50 /><br>
             </div>
         </div>
 {#        <div class="col-md-7 control-label no-padding-right">#}

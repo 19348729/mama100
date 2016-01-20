@@ -65,7 +65,7 @@ def manualAdd(request):
         # fb=cmdb_manual_info(ip=ip,brand=brand,online_time=online_time,u_size=u_size,jigui_number=jigui_number)
         # fb.save()
 
-        return HttpResponse('<a href="http://192.168.234.139:5050/manual_index"><button type="button">修改成功 返回前一页</button></a>')
+        return HttpResponse('<a href="/manual_index"><button type="button">修改成功 返回前一页</button></a>')
 
 #def manual_zichan(request):
  #       result=cmdb_manual_info.objects.all()

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login,logout
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 #from tools.tools import *
 from tools.jenkins.jenkins_api import *
@@ -14,13 +14,30 @@ import  jenkins
 import time
 from tools.get_docker_info import get_host
 from views import docker_maxport
+from tools.getdir import *
 from tools.get_docker_info import docker_create
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from tools.ssh_run import *
+from tools.jenkins.jenkins_api import build_job
 from mama100.dockerweb.models import *
 soft_type=['rpc','glassfish','web','DB','nginx','lvs','redis']
 # ent_type=['生产','测试','开发']
 ent_type=['prd','test','dev']
+
+def get_config_file(soft_name,ent_type):
+
+    try:
+        base_dir='/mama100/jenkins/deploy/patch/'
+        find_dir=base_dir+soft_name+'/'+ent_type
+        find_dir_list=get_dir_file(find_dir)
+        # print find_dir_list
+        if find_dir_list:
+            return 0
+        else:
+            return '没有配置文件'
+    except OSError:
+        return '没有目录'
+
 
 #####架构名称
 jg_name_object=cmdb_project_base.objects.filter(project_father=0)
@@ -29,20 +46,27 @@ for i in jg_name_object:
     jg_name.append(i.project_name)
 
 def project_info(request):
+    config_file_dict={}
     env='prd'
     if request.GET:
         env=request.GET['env']
-
-        print env
-
         if env == 'all':
-            contacts=cmdb_project.objects.all
-
+            contacts=cmdb_project.objects.all()
+            # print "#####%s~~~"%contacts
+            # jenkins_view_name=contacts[j.other1]
+            # print "%s~~~~~~~~~"%jenkins_view_name
+            for i in contacts:
+                config_file_dict[i.soft_name]=get_config_file(i.soft_name,i.ent_type)
         else:
             contacts=cmdb_project.objects.filter(ent_type=env)
+            for i in contacts:
+                config_file_dict[i.soft_name]=get_config_file(i.soft_name,i.ent_type)
     else:
         contacts=cmdb_project.objects.filter(ent_type='prd')
-    return render_to_response('project_info.html', {"contacts": contacts,"env":env})
+        for i in contacts:
+            config_file_dict[i.soft_name]=get_config_file(i.soft_name,i.ent_type)
+    # config_file_dict={'a':'a','b':'b'}
+    return render_to_response('project_info.html', {"contacts": contacts,"env":env,"config_file_dict":config_file_dict})
 
 #####上线资源申请
 def project_online(request):
@@ -52,8 +76,6 @@ def project_online(request):
 
 def project_online_commit(request):
     req_temp=request.POST
-    print req_temp
-
     kaifa_man=req_temp['kaifa_man']
     jg_name=req_temp['jg_name']
 
@@ -105,7 +127,7 @@ def project_online_commit(request):
         a=cmdb_docker_port(docker_ip=i,docker_port=port+'-'+str(int(port)+int(duankou)),docker_name=ent_type+soft_name)
         a.save()
     # cmdb_project.objects.filter(id=id).update(nodeip=nodeips,kaifa_man=kaifa_man,project_name=project_name,jg_name=jg_name,soft_type=soft_type,ent_type=ent_type,soft_name=soft_name)
-    return HttpResponse(str(ip_list)+str(port_dict)+'<a href="http://192.168.234.139:5050/project_online"><button type="button">返回前一页</button></a>')
+    return HttpResponse(str(ip_list)+str(port_dict)+'<a href="/project_online"><button type="button">返回前一页</button></a>')
     # return render_to_response('project_info.html', {"contacts": contacts})
 
 def project_online_build_job(request):
@@ -161,7 +183,7 @@ def project_create_commit(request):
     for ip in nodeip:
         cmdb_project_auto.objects.create(project=soft_name,ip=ip)
     # return HttpResponse("addok")
-    return HttpResponse('<a href="http://192.168.234.139:5050/project_create"><button type="button">修改成功 返回前一页</button></a>')
+    return HttpResponse('<a href="/project_create"><button type="button">修改成功 返回前一页</button></a>')
 
 
 def project_edit(request):
@@ -192,12 +214,19 @@ def project_edit_commit(request):
     nodeips=''
     for i in nodeip:
         nodeips=nodeips+i+' '
-
     print ent_type
 
 
 
     cmdb_project.objects.filter(id=id).update(nodeip=nodeips,kaifa_man=kaifa_man,project_name=project_name,jg_name=jg_name,soft_type=soft_type,ent_type=ent_type,soft_name=soft_name)
     contacts=cmdb_project.objects.all()
-    return HttpResponse('<a href="http://192.168.234.139:5050/project_info"><button type="button">修改成功 返回前一页</button></a>')
+    return HttpResponse('<a href="/project_info"><button type="button">修改成功 返回前一页</button></a>')
     # return render_to_response('project_info.html', {"contacts": contacts})
+
+
+
+def goujian(request):
+    job_name=request.GET['job_name']
+    print "job_name is :%s"%job_name
+    build_job(job_name)
+    return HttpResponse("ok")

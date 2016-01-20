@@ -98,7 +98,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     '/mama100/mama100/static',
 )
-
+MEDIA_ROOT = '/var/www/html/upload'
+# MEDIA_ROOT = '/mama100/jenkins/deploy/patch/'
 ###for websocket
 WEBSOCKET_URLCONF='/mama100/mama100/websocket_urls.py'
-# WEBSOCKET_FACTORY_CLASS = 'dwebsocket.backends.uwsgi.factory.uWsgiWebSocketFactory'
+# WEBSOCKET_FACTORY_CLASS = 'dwebsocket.backends.uwsgi.factory.uWsgiWebSocketFactory '

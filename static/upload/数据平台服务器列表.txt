@@ -1,0 +1,43 @@
+hadoop:
+192.168.234.58  data12.module.prd  masternode
+192.168.234.22	data17.mobule.p.prd
+192.168.234.23	data18.mobule.p.prd
+192.168.234.24	data19.mobule.p.prd
+192.168.234.25	data20.mobule.p.prd
+192.168.234.26	data21.mobule.p.prd
+192.168.234.16	data1.module.p.prd
+
+gp:
+192.168.2.73	gpm
+192.168.2.82	gpms
+192.168.2.69	gps1
+192.168.2.70	gps2
+192.168.2.72	gps3
+192.168.2.83	gps4
+
+elasticsearch:
+192.168.234.81	data4.module.prd
+192.168.234.91	data5.module.prd
+192.168.234.134	data13.module.prd
+192.168.234.135	data14.module.prd
+192.168.234.136	data15.module.prd
+
+mdp rpc:
+192.168.234.51	data2.module.prd
+192.168.234.71	data3.module.prd
+
+storm:
+192.168.234.101	data6.module.prd
+192.168.234.111	data7.module.prd
+192.168.234.121	data8.module.prd
+
+cpms web:
+192.168.2.53
+192.168.2.118
+192.168.2.131
+
+mongodb:
+192.168.2.108
+192.168.234.82	data9.module.prd
+
+

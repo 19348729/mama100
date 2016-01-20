@@ -124,6 +124,9 @@
                                                              架构分类
                                                         </th>
                                                         <th><i class="icon-time bigger-110 hidden-480"></i>
+                                                             jenkins视图
+                                                        </th>
+                                                        <th><i class="icon-time bigger-110 hidden-480"></i>
                                                              项目操作
                                                         </th>
                                                          <th >
@@ -142,8 +145,27 @@
                                             <td>{{i.nodeip}}</td>
                                             <td>{{i.online_time|date:"Y-m-d"}}</td>
                                             <td>{{i.jg_name}}</td>
-                                            <td><a href="project_edit/?id={{i.id}}">编辑</a>    <a href="project_delete?id={{i.id}}">删除</a></td>
-                                            <td><a href="config_edit?soft_name={{ i.soft_name }}">编辑</a>  </td>
+                                            <td>{{i.other1}}</td>
+                                            <td>
+                                                <a href="project_edit/?id={{i.id}}">编辑</a>
+                                                <a href="project_delete?id={{i.id}}">删除</a>
+                                                <a href="config_info_index?soft_name={{i.soft_name}}&&env_type={{ i.ent_type }}&&viewname={{ i.other1 }}">管理</a>
+
+                                            </td>
+                                            <td>
+                                            {%  for k,v in config_file_dict.items %}
+                                                {% if i.soft_name == k  %}
+                                                        {% if v == 0 %}
+                                                            <a href="config_info_index?soft_name={{i.soft_name}}&&env_type={{ i.ent_type }}&&viewname={{ i.other1 }}">编辑</a>
+
+                                                        {% elif v == '没有配置文件' %}
+                                                            <a href="upload_file_index?soft_name={{i.soft_name}}&&env_type={{ i.ent_type }}">上传</a>
+                                                        {% else %}
+                                                            {{ v }}
+                                                        {% endif %}
+                                                {% endif %}
+                                             {% endfor %}
+                                            </td>
 
                                           </tr>
                                     {% endfor %}
@@ -191,5 +213,7 @@
                 var env=document.getElementById('envtype').innerText;
             document.getElementById( env ).className='active';
     </script>
+
+
 	</body>
 </html>

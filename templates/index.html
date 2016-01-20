@@ -272,6 +272,22 @@
 							<a style="cursor:pointer;" onclick="onSelect(5001)">
 
 								<i class="icon-double-angle-right"></i>
+								操作申请
+							</a>
+						</li>
+
+						<li>
+							<a style="cursor:pointer;" onclick="onSelect(5002)">
+
+								<i class="icon-double-angle-right"></i>
+								任务处理
+							</a>
+						</li>
+
+						<li>
+							<a style="cursor:pointer;" onclick="onSelect(5003)">
+
+								<i class="icon-double-angle-right"></i>
 								操作记录
 							</a>
 						</li>
@@ -399,6 +415,12 @@ function onSelect(index){
 		document.getElementById('nb').src='docker_con_index';
 	}
     if(index==5001){
+		document.getElementById('nb').src='records_input';
+	}
+    if(index==5002){
+		document.getElementById('nb').src='admin_commit';
+	}
+    if(index==5003){
 		document.getElementById('nb').src='records';
 	}
 }
